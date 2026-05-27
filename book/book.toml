@@ -1,0 +1,11 @@
+[book]
+authors = ["Mainmatter"]
+language = "en"
+src = "src"
+title = "Rust procedural macros workshop"
+
+[output.html]
+git-repository-url = "https://github.com/mainmatter/rust-proc-macro-workshop"
+
+[preprocessor.exercise-linker]
+exercise_root_url = "https://github.com/mainmatter/rust-proc-macro-workshop/tree/main/exercises"
