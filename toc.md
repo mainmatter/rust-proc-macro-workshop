@@ -1,51 +1,51 @@
 - Introduction
-  * Welcome (overview of the 3 types of proc macros): #[derive(Debug)], vec!, #[test]
-  * Exploring proc macros with cargo expand
-  * thiserror: a derive macro in the wild
-  * serde: derives with container and field attributes (or clap instead?)
-  * Macros vs functions
-  * Declarative vs procedural macros
-  * When to use proc macros?
+  - Welcome (overview of the 3 types of proc macros): #[derive(Debug)], vec!, #[test]
+  - Exploring proc macros with cargo expand
+  - thiserror: a derive macro in the wild
+  - serde: derives with container and field attributes (or clap instead?)
+  - Macros vs functions
+  - Declarative vs procedural macros
+  - When to use proc macros?
 
 - Basics
-  * Crate structure (create a proc-macro crate, wire it up)
-  * The re-export pattern (facade crate, e.g. serde + serde_derive)
-  * What a proc macro returns (valid TokenStream)
-  * A minimal derive macro
-  * Token and TokenStream
-  * proc-macro2
-  * Parsing Rust code with syn
-  * Generating code with quote
+  - Crate structure (create a proc-macro crate, wire it up)
+  - The re-export pattern (facade crate, e.g. serde + serde_derive)
+  - What a proc macro returns (valid TokenStream)
+  - A minimal derive macro
+  - Token and TokenStream
+  - proc-macro2
+  - Parsing Rust code with syn
+  - Generating code with quote
 
 - Derive macros
-  * Handling struct fields
-  * Handling enums
-  * Using absolute paths: `::std::option::Option`
-  * Preventing name clashes in generated symbols
-  * Error reporting: panic vs compile_error!
-  * Error reporting: syn::Error and Span
-  * Spans for better error messages
-  * Testing error messages with trybuild
-  * Container attributes
-  * Field attributes
-  * Parsing attributes with Darling
-  * Handling generics (type parameters, lifetimes, where clauses)
-  * Building a #[derive(Builder)]
+  - Handling struct fields
+  - Handling enums
+  - Using absolute paths: `::std::option::Option`
+  - Preventing name clashes in generated symbols
+  - Error reporting: panic vs compile_error!
+  - Error reporting: syn::Error and Span
+  - Spans for better error messages
+  - Testing error messages with trybuild
+  - Container attributes
+  - Field attributes
+  - Parsing attributes with Darling
+  - Handling generics (type parameters, lifetimes, where clauses)
+  - Building a #[derive(Builder)]
 
 - Function-like macros
-  * Why is println! a macro?
-  * Parsing arbitrary token input
-  * Custom syntax
-  * When to use function-like over declarative macros
-  * Building a simple DSL (routes!)
+  - Why is println! a macro?
+  - Parsing arbitrary token input
+  - Custom syntax
+  - When to use function-like over declarative macros
+  - Building a simple DSL (routes!)
 
 - Attribute-like macros
-  * A minimal attribute macro
-  * Transforming a function (e.g. adding a timing/logging wrapper)
-  * Graceful error handling: re-emitting the original item to avoid cascading errors
-  * Parsing attribute arguments with Darling's FromMeta
-  * Building a #[retry] attribute: #[retry(times = 3, delay_ms = 100)] — wraps a function to retry on error
+  - A minimal attribute macro
+  - Transforming a function (e.g. adding a timing/logging wrapper)
+  - Graceful error handling: re-emitting the original item to avoid cascading errors
+  - Parsing attribute arguments with Darling's FromMeta
+  - Building a #[retry] attribute: #[retry(times = 3, delay_ms = 100)] — wraps a function to retry on error
 
 - Putting it all together
-  * Building a state machine macro: derive-style code generation (enum + methods), custom attributes (transitions, initial state), error reporting
+  - Building a state machine macro: derive-style code generation (enum + methods), custom attributes (transitions, initial state), error reporting
     (invalid transitions), hygiene (generated identifiers), and possibly even custom syntax?
