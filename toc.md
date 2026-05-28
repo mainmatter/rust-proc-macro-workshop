@@ -1,11 +1,12 @@
+- Welcome
+
 - Introduction
-  - Welcome (overview of the 3 types of proc macros): #[derive(Debug)], vec!, #[test]
-  - Exploring proc macros with cargo expand
+  - The three types of procedural macros
+  - Exploring macros with cargo expand
   - thiserror: a derive macro in the wild
-  - serde: derives with container and field attributes (or clap instead?)
   - Macros vs functions
   - Declarative vs procedural macros
-  - When to use proc macros?
+  - When to use procedural macros
 
 - Basics
   - Crate structure (create a proc-macro crate, wire it up)
@@ -18,6 +19,7 @@
   - Generating code with quote
 
 - Derive macros
+  - serde: container and field attributes
   - Handling struct fields
   - Handling enums
   - Using absolute paths: `::std::option::Option`

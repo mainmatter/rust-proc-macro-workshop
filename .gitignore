@@ -6,3 +6,4 @@ vendor/
 target/
 .cargo
 CLAUDE.md
+.claude
