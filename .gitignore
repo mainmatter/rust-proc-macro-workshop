@@ -6,4 +6,5 @@ vendor/
 target/
 .cargo
 CLAUDE.md
-.claude
+.claude/
+.playwright-mcp/
