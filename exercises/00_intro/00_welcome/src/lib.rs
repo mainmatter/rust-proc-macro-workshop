@@ -11,6 +11,14 @@ fn greeting() -> &'static str {
     todo!()
 }
 
+// Your solutions will be automatically verified by a set of tests.
+// You can run these tests directly by invoking the `cargo test` command in your terminal,
+// from the root of this exercise's directory. That's what the `wr` command does for you
+// under the hood.
+//
+// ⚠️ **DO NOT MODIFY THE TESTS** ⚠️
+// They are there to help you validate your solutions. You should only change the code that's being
+// tested, not the tests themselves.
 #[cfg(test)]
 mod tests {
     use crate::greeting;
