@@ -13,3 +13,4 @@ helpers = { path = "helpers" }
 proc-macro2 = "1"
 quote = "1"
 syn = { version = "2", features = ["full"] }
+thiserror = "2"
