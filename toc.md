@@ -8,7 +8,7 @@
   - Declarative vs procedural macros
   - When to use procedural macros
 
-- Basics
+- The proc-macro toolkit
   - Crate structure (create a proc-macro crate, wire it up)
   - The re-export pattern (facade crate, e.g. serde + serde_derive)
   - What a proc macro returns (valid TokenStream)
@@ -17,6 +17,7 @@
   - proc-macro2
   - Parsing Rust code with syn
   - Generating code with quote
+  - Testing with trybuild
 
 - Derive macros
   - serde: container and field attributes
@@ -27,7 +28,7 @@
   - Error reporting: panic vs compile_error!
   - Error reporting: syn::Error and Span
   - Spans for better error messages
-  - Testing error messages with trybuild
+  - Testing error messages with trybuild (using trybuild for error snapshots)
   - Container attributes
   - Field attributes
   - Parsing attributes with Darling

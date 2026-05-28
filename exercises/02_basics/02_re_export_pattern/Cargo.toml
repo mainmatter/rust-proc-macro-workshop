@@ -1,0 +1,7 @@
+[package]
+name = "re-export-exercise"
+version = "0.1.0"
+edition = "2024"
+
+# TODO: Add the `macros` crate (in the `macros/` subdirectory) as a dependency.
+[dependencies]
