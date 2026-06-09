@@ -77,10 +77,26 @@ pub fn inspect(input: TokenStream) -> TokenStream {
 
 We use [`eprintln!`](https://doc.rust-lang.org/std/macro.eprintln.html) rather than
 [`println!`](https://doc.rust-lang.org/std/macro.println.html) here. Both format and print
-text, but `println!` writes to **stdout** while `eprintln!` writes to **stderr**. This
-matters because proc macros run inside the compiler, and the compiler captures stdout. Only
-stderr is passed through to the terminal, so `println!` output would be silently swallowed.
-This makes `eprintln!` useful for debugging alongside `cargo expand`.
+text, but `println!` writes to **stdout** while `eprintln!` writes to **stderr**. Both show up
+during compilation, so either works for debugging — but by convention proc macros use
+`eprintln!`, keeping debug noise on stderr and separate from anything a build might emit on
+stdout. This makes `eprintln!` a handy debugging tool alongside `cargo expand`.
+
+Keep in mind that a proc macro only runs when the crate that invokes it is actually
+(re)compiled. If a build is cached, the macro doesn't run and you'll see no output — touch the
+source or run `cargo clean` to force a rebuild.
+
+## Descending into groups
+
+Iterating with `for tree in input` only visits the **top-level** tokens. Remember that a
+`TokenStream` is a tree: anything inside `(...)`, `[...]`, or `{...}` is wrapped in a
+[`Group`](https://doc.rust-lang.org/proc_macro/struct.Group.html), and its contents are a
+nested `TokenStream`. For a struct like `struct Pair { x: i32 }`, the top level is just
+`Ident("struct")`, `Ident("Pair")`, and a single `Group` — the fields `x` and `i32` live
+_inside_ that group.
+
+To reach them, call [`Group::stream()`](https://doc.rust-lang.org/proc_macro/struct.Group.html#method.stream)
+to get the inner stream and recurse.
 
 ## Building a `TokenStream`
 
@@ -109,4 +125,5 @@ makes this much more ergonomic.
 ## Exercise
 
 Write a derive macro that inspects the token stream it receives and counts the number of
-`Ident` tokens in it. The macro should generate a method that returns this count.
+`Ident` tokens in it — including those nested inside groups, which you'll need to recurse into
+with `Group::stream()`. The macro should generate a method that returns this count.
