@@ -1,0 +1,10 @@
+[package]
+name = "struct-fields-exercise"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+struct-fields-exercise-macros = { path = "macros" }
+
+[dev-dependencies]
+trybuild = { workspace = true }

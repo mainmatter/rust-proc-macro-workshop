@@ -1,0 +1,10 @@
+[package]
+name = "syn-error-exercise"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+syn-error-exercise-macros = { path = "macros" }
+
+[dev-dependencies]
+trybuild = { workspace = true }

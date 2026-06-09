@@ -1,0 +1,5 @@
+error: Unknown field: `renmae`. Did you mean `rename`?
+ --> tests/fail/unknown_key.rs:8:13
+  |
+8 |     #[model(renmae = "email_address")]
+  |             ^^^^^^
