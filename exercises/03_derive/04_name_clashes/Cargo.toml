@@ -1,0 +1,10 @@
+[package]
+name = "name-clashes-exercise"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+name-clashes-exercise-macros = { path = "macros" }
+
+[dev-dependencies]
+trybuild = { workspace = true }

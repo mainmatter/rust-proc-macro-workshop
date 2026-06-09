@@ -3,6 +3,23 @@
 version = 4
 
 [[package]]
+name = "abs-paths-exercise"
+version = "0.1.0"
+dependencies = [
+ "abs-paths-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "abs-paths-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "basics-overview"
 version = "0.1.0"
 dependencies = [
@@ -10,22 +27,183 @@ dependencies = [
 ]
 
 [[package]]
+name = "builder-exercise"
+version = "0.1.0"
+dependencies = [
+ "builder-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "builder-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "cargo-expand-exercise"
 version = "0.1.0"
+
+[[package]]
+name = "compile-error-exercise"
+version = "0.1.0"
+dependencies = [
+ "compile-error-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "compile-error-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "container-attr-exercise"
+version = "0.1.0"
+dependencies = [
+ "container-attr-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "container-attr-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "crate-structure-exercise"
 version = "0.1.0"
 
 [[package]]
+name = "darling"
+version = "0.20.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc7f46116c46ff9ab3eb1597a45688b6715c6e628b5c133e288e709a29bcb4ee"
+dependencies = [
+ "darling_core",
+ "darling_macro",
+]
+
+[[package]]
+name = "darling-exercise"
+version = "0.1.0"
+dependencies = [
+ "darling-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "darling-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "darling",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "darling_core"
+version = "0.20.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0d00b9596d185e565c2207a0b01f8bd1a135483d02d9b7b0a54b11da8d53412e"
+dependencies = [
+ "fnv",
+ "ident_case",
+ "proc-macro2",
+ "quote",
+ "strsim",
+ "syn",
+]
+
+[[package]]
+name = "darling_macro"
+version = "0.20.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc34b93ccb385b40dc71c6fceac4b2ad23662c7eeb248cf10d529b7e055b6ead"
+dependencies = [
+ "darling_core",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "declarative-vs-procedural"
 version = "0.1.0"
+
+[[package]]
+name = "enums-exercise"
+version = "0.1.0"
+dependencies = [
+ "enums-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "enums-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "equivalent"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
+
+[[package]]
+name = "field-attr-exercise"
+version = "0.1.0"
+dependencies = [
+ "field-attr-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "field-attr-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "fnv"
+version = "1.0.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
+
+[[package]]
+name = "generics-exercise"
+version = "0.1.0"
+dependencies = [
+ "generics-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "generics-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "glob"
@@ -42,6 +220,12 @@ checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 [[package]]
 name = "helpers"
 version = "0.1.0"
+
+[[package]]
+name = "ident_case"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
 
 [[package]]
 name = "indexmap"
@@ -84,8 +268,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "name-clashes-exercise"
+version = "0.1.0"
+dependencies = [
+ "name-clashes-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "name-clashes-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "overview"
 version = "0.1.0"
+
+[[package]]
+name = "overview-exercise"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
 
 [[package]]
 name = "proc-macro-returns-exercise"
@@ -151,6 +360,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
 dependencies = [
  "serde_core",
+ "serde_derive",
 ]
 
 [[package]]
@@ -196,6 +406,46 @@ dependencies = [
 ]
 
 [[package]]
+name = "spans-exercise"
+version = "0.1.0"
+dependencies = [
+ "spans-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "spans-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "strsim"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
+
+[[package]]
+name = "struct-fields-exercise"
+version = "0.1.0"
+dependencies = [
+ "struct-fields-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "struct-fields-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "syn"
 version = "2.0.117"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -204,6 +454,23 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "syn-error-exercise"
+version = "0.1.0"
+dependencies = [
+ "syn-error-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "syn-error-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -326,6 +593,23 @@ dependencies = [
  "target-triple",
  "termcolor",
  "toml",
+]
+
+[[package]]
+name = "trybuild-errors-exercise"
+version = "0.1.0"
+dependencies = [
+ "trybuild",
+ "trybuild-errors-exercise-macros",
+]
+
+[[package]]
+name = "trybuild-errors-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
