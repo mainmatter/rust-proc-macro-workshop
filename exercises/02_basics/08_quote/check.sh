@@ -13,4 +13,6 @@ if ! grep -q 'quote!' "$dir/macros/src/lib.rs"; then
     exit 1
 fi
 
-cargo test --color always
+# Test both the consumer crate and the macro crate (the latter holds the unit
+# tests for `field_names_impl`).
+cargo test --color always -p quote-exercise -p quote-exercise-macros
