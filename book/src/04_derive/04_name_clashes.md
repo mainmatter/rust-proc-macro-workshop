@@ -79,5 +79,5 @@ both the definition and the call site, so they always agree.
 the `Accessors` macro generates a module-level accessor _function_ per field (emitted next to the
 `impl`, not inside it). The unique name you saw for `Loud` combined a prefix with the _type_ name —
 but that isn't enough here. Work out a `format_ident!` scheme that survives both clashes the test
-(`tests/pass/accessors.rs`) throws at it: two fields in one struct, and two structs that share a
+(`examples/accessors.rs`) throws at it: two fields in one struct, and two structs that share a
 field name. The functions live at module scope, so strategy 1 doesn't apply.

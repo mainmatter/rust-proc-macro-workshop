@@ -23,7 +23,9 @@ fn main() {
 
     // A legal move hands back the new state.
     assert_eq!(
-        TrafficLight::Red.transition_to(TrafficLight::Green).unwrap(),
+        TrafficLight::Red
+            .transition_to(TrafficLight::Green)
+            .unwrap(),
         TrafficLight::Green,
     );
 

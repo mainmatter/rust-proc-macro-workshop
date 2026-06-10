@@ -77,7 +77,7 @@ Build a `syn::Block` with `parse_quote!` that wraps the original body in the clo
 loops up to `times` times, returns on success, and sleeps `delay_ms` between failed attempts before
 giving up with the last error. Reach for absolute paths (`::core::result::Result`, `::std::thread`,
 `::std::time::Duration`) so the generated code never depends on what's in scope at the call site.
-Make `tests/pass/retrying.rs` pass.
+Make `examples/retrying.rs` pass.
 
 > **Going further.** Real retry helpers add exponential backoff (doubling the delay each time), a
 > jitter factor, or a predicate that only retries _certain_ errors. Each is a small extension of the

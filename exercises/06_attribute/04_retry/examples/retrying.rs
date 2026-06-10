@@ -31,7 +31,11 @@ static QUICK_CALLS: AtomicU32 = AtomicU32::new(0);
 #[retry(times = 3)]
 fn quick() -> Result<u32, String> {
     let n = QUICK_CALLS.fetch_add(1, Ordering::SeqCst) + 1;
-    if n < 2 { Err("once".to_string()) } else { Ok(n) }
+    if n < 2 {
+        Err("once".to_string())
+    } else {
+        Ok(n)
+    }
 }
 
 fn main() {

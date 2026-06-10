@@ -93,7 +93,7 @@ a fundamental limitation of macros, which only ever see syntax, never resolved t
 Complete `#[derive(Builder)]`. The builder struct, its initialiser, and the setters are generated
 for you, along with the `option_inner` helper. Your job is the heart of `build()`: for each field,
 emit the expression that produces its value — cloning optional fields straight through, and
-erroring on unset required ones. Make `tests/pass/command.rs` pass.
+erroring on unset required ones. Make `examples/command.rs` pass.
 
 > **Going further.** A common extension is a field attribute, `#[builder(each = "arg")]`, that
 > generates a method to push items onto a `Vec` field one at a time. With this chapter behind you,

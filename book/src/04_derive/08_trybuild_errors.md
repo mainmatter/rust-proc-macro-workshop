@@ -14,7 +14,7 @@ You met `trybuild` in chapter 3. The other half of its API is `compile_fail`:
 #[test]
 fn tests() {
     let t = trybuild::TestCases::new();
-    t.pass("tests/pass/*.rs");
+    t.pass("examples/*.rs");
     t.compile_fail("tests/fail/*.rs");
 }
 ```
