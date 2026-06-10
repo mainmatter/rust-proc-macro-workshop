@@ -68,6 +68,5 @@ fn accessor_name(struct_name: &Ident, field_name: &Ident) -> Ident {
     //     - across structs, two structs may share a field name (both have an
     //       `x`), so the name must vary per struct too (use `struct_name`).
     //   A `__` prefix keeps you clear of names a user would plausibly write.
-    let _ = (struct_name, field_name);
-    todo!()
+    format_ident!("__{}_{}", struct_name, field_name)
 }

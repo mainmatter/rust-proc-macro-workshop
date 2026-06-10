@@ -175,6 +175,13 @@ dependencies = [
 [[package]]
 name = "crate-structure-exercise"
 version = "0.1.0"
+dependencies = [
+ "crate-structure-exercise-macros",
+]
+
+[[package]]
+name = "crate-structure-exercise-macros"
+version = "0.1.0"
 
 [[package]]
 name = "custom-syntax-exercise"
@@ -410,9 +417,9 @@ dependencies = [
 
 [[package]]
 name = "memchr"
-version = "2.8.1"
+version = "2.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6b947ae49db0d222b1dbc6b113ce7248a3fc3a6ca21b696717bfc000ba4484d8"
+checksum = "88904434abc2901f197fe8cc55f0445e7ded921dba5911dad2e2b39b48e663c4"
 
 [[package]]
 name = "minimal-derive-exercise"
@@ -551,7 +558,12 @@ name = "re-export-exercise"
 version = "0.1.0"
 dependencies = [
  "pretty_assertions",
+ "re-export-exercise-macros",
 ]
+
+[[package]]
+name = "re-export-exercise-macros"
+version = "0.1.0"
 
 [[package]]
 name = "retry-exercise"
@@ -719,9 +731,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.117"
+version = "2.0.118"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e665b8803e7b1d2a727f4023456bbbbe74da67099c585258af0ad9c5013b9b99"
+checksum = "1b9ae57f904213ebb649ce6895b8a66c66f0203b9319718f69a5612a065b1422"
 dependencies = [
  "proc-macro2",
  "quote",

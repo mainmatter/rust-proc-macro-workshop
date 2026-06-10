@@ -15,33 +15,33 @@
 /// Scenario: a `max!(a, b, c, ...)` macro that expands to a chain of
 /// `std::cmp::max` calls over its comma-separated arguments.
 pub fn scenario_max() -> bool {
-    todo!()
+    false
 }
 
 /// Scenario: an `html! { <ul><li>{item}</li></ul> }` macro that lets you write
 /// HTML-like markup — angle brackets, tags, and `{ ... }` interpolation — directly
 /// in Rust source.
 pub fn scenario_html_dsl() -> bool {
-    todo!()
+    true
 }
 
 /// Scenario: a `sql!("SELECT name FROM users WHERE id = ?")` macro that connects to
 /// your real database at compile time, checks the query against the live schema, and
 /// generates a strongly-typed row struct.
 pub fn scenario_checked_sql() -> bool {
-    todo!()
+    true
 }
 
 /// Scenario: a `hashset!(a, b, c)` macro that inserts its comma-separated arguments
 /// into a fresh `HashSet`.
 pub fn scenario_hashset() -> bool {
-    todo!()
+    false
 }
 
 /// Scenario: a `clamp(value, lo, hi)` helper that returns `value` bounded to the
 /// `lo..=hi` range.
 pub fn scenario_clamp() -> bool {
-    todo!()
+    false
 }
 
 #[cfg(test)]

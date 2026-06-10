@@ -1,5 +1,9 @@
 use trybuild_errors_exercise::Getters;
 
-// TODO: derive `Getters` on a struct that has a `()`-typed field.
+#[derive(Getters)]
+struct Config {
+    name: String,
+    marker: (),
+}
 
 fn main() {}

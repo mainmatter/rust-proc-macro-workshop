@@ -43,12 +43,17 @@ fn debug_fields_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
         //   rather than its ident. Watch the gotcha the book flags: a plain
         //   integer renders with a type suffix (`0usize`) and is invalid as a
         //   field index — reach for the quote-aware index type `syn` provides.
-        Fields::Unnamed(fields) => {
-            let _ = fields;
-            todo!()
-        }
-        // TODO: unit struct — `struct Foo;` — has no fields at all.
-        Fields::Unit => todo!(),
+        Fields::Unnamed(fields) => fields
+            .unnamed
+            .iter()
+            .enumerate()
+            .map(|(i, _)| {
+                let index = syn::Index::from(i);
+                quote! { format!("{:?}", &self.#index) }
+            })
+            .collect(),
+        // unit struct — `struct Foo;` — has no fields at all.
+        Fields::Unit => Vec::new(),
     };
 
     quote! {

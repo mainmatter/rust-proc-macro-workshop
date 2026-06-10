@@ -25,8 +25,8 @@ fn type_name_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     //   Make both the return type and the constructor call use the absolute path.
     quote! {
         impl #name {
-            pub fn type_name(&self) -> String {
-                String::from(stringify!(#name))
+            pub fn type_name(&self) -> ::std::string::String {
+                ::std::string::String::from(stringify!(#name))
             }
         }
     }

@@ -1,0 +1,8 @@
+error: Getters can only be derived for structs
+ --> tests/fail/on_enum.rs:4:1
+  |
+4 | / enum Shape {
+5 | |     Circle,
+6 | |     Square,
+7 | | }
+  | |_^

@@ -26,22 +26,15 @@ fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
         _ => panic!("FieldNames only supports structs"),
     };
 
-    // TODO: Rewrite this function to use `quote!` instead of `format!`.
-    let field_names_str = fields
-        .iter()
-        .map(|f| format!("\"{}\"", f.ident.as_ref().unwrap()))
-        .collect::<Vec<_>>()
-        .join(", ");
+    let field_names = fields.iter().map(|f| f.ident.as_ref().unwrap().to_string());
 
-    format!(
-        "impl {name} {{
-            pub fn field_names() -> &'static [&'static str] {{
-                &[{field_names_str}]
-            }}
-        }}"
-    )
-    .parse()
-    .unwrap()
+    quote! {
+        impl #name {
+            pub fn field_names() -> &'static [&'static str] {
+                &[#(#field_names),*]
+            }
+        }
+    }
 }
 
 #[cfg(test)]
@@ -53,8 +46,8 @@ mod tests {
     /// `proc-macro2` exercise — parse a `DeriveInput` from a string and call
     /// `field_names_impl`, no separate crate and no real `#[derive]` needed.
     ///
-    /// This keeps passing whether `field_names_impl` uses `format!` or `quote!`,
-    /// since both produce the same tokens.
+    /// This keeps passing whether `field_names_impl` uses string formatting or
+    /// `quote!`, since both produce the same tokens.
     ///
     /// Note its limits, though: it only checks the tokens we generate — not that
     /// they actually compile and run, and not what error a misuse shows the user.

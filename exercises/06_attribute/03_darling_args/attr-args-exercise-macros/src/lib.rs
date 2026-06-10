@@ -1,6 +1,18 @@
+use darling::{FromMeta, ast::NestedMeta};
 use proc_macro::TokenStream;
 use quote::{format_ident, quote};
 use syn::{ItemFn, parse_macro_input};
+
+#[derive(FromMeta)]
+struct EndpointArgs {
+    path: String,
+    #[darling(default = "default_method")]
+    method: String,
+}
+
+fn default_method() -> String {
+    "GET".to_string()
+}
 
 /// `#[endpoint(path = "/users", method = "POST")]` — attaches routing metadata to a
 /// function. `path` is required; `method` is optional and defaults to `"GET"`. The
@@ -15,27 +27,16 @@ use syn::{ItemFn, parse_macro_input};
 pub fn endpoint(attr: TokenStream, item: TokenStream) -> TokenStream {
     let func = parse_macro_input!(item as ItemFn);
 
-    // TODO: parse the `#[endpoint(...)]` arguments with darling's `FromMeta`.
-    //   1. Declare a struct that derives `darling::FromMeta` with:
-    //        - a required `path: String`;
-    //        - an optional `method: String` that defaults to "GET" — use
-    //          `#[darling(default = "...")]` pointing at a helper fn, just like the
-    //          `#[darling(default = ...)]` you used in chapter 4's darling section.
-    //   2. Parse it out of `attr` (you'll want
-    //      `use darling::{FromMeta, ast::NestedMeta};`):
-    //        - `NestedMeta::parse_meta_list(attr.into())` splits the tokens into a list
-    //          of nested-meta items. It fails with a `syn::Error`, so convert that with
-    //          `darling::Error::from(..)`.
-    //        - `YourArgs::from_list(&meta)` then parses your struct and fails with a
-    //          `darling::Error`.
-    //      On either failure, return `err.write_errors()` as the output `TokenStream`
-    //      (that's how darling renders attribute mistakes as compiler errors).
-    //   Replace these two placeholders with the values parsed from `attr`.
-    let _ = &attr;
-    let path: String = String::new();
-    let method: String = String::new();
+    let meta = match NestedMeta::parse_meta_list(attr.into()) {
+        Ok(meta) => meta,
+        Err(err) => return TokenStream::from(darling::Error::from(err).write_errors()),
+    };
+    let args = match EndpointArgs::from_list(&meta) {
+        Ok(args) => args,
+        Err(err) => return TokenStream::from(err.write_errors()),
+    };
 
-    endpoint_impl(&func, &path, &method).into()
+    endpoint_impl(&func, &args.path, &args.method).into()
 }
 
 fn endpoint_impl(func: &ItemFn, path: &str, method: &str) -> proc_macro2::TokenStream {

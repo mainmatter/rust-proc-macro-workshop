@@ -13,7 +13,7 @@ pub fn field_count(input: TokenStream) -> TokenStream {
 }
 
 fn field_count_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
-    let _name = &input.ident;
+    let name = &input.ident;
 
     let fields = match &input.data {
         Data::Struct(data) => match &data.fields {
@@ -23,7 +23,13 @@ fn field_count_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
         _ => panic!("FieldCount only supports structs"),
     };
 
-    // TODO: Count the number of fields and generate the `impl` block.
-    let _ = fields;
-    todo!()
+    let count = fields.len();
+
+    format!(
+        "impl {name} {{
+            pub fn field_count() -> usize {{ {count} }}
+        }}"
+    )
+    .parse()
+    .unwrap()
 }

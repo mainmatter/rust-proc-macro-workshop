@@ -60,15 +60,17 @@ fn column_name(field: &Field) -> syn::Result<String> {
             // gives us the `key = value` pair.
             let nv = attr.meta.require_name_value()?;
 
-            // TODO: `nv.value` is a `syn::Expr`. Pull the string out of it and
-            //   `return Ok(..)` with it. The value should be a string-literal
-            //   expression — match the `syn::Expr::Lit` wrapping a `syn::Lit::Str`
-            //   and use its `.value()`. If it's anything else, `return` an `Err`
-            //   (spanned on `nv.value`) saying a string literal was expected.
-            //   (The book's `parse_args` doesn't help here — this is the name-value
-            //   shape, so you inspect the expression yourself.)
-            let _ = nv;
-            todo!()
+            if let syn::Expr::Lit(syn::ExprLit {
+                lit: syn::Lit::Str(s),
+                ..
+            }) = &nv.value
+            {
+                return Ok(s.value());
+            }
+            return Err(syn::Error::new_spanned(
+                &nv.value,
+                "expected a string literal",
+            ));
         }
     }
 

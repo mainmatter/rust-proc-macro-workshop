@@ -4,12 +4,14 @@
 /// figure out the `Display` messages, the error source, and the `From` conversion you need.
 /// The `thiserror` documentation covers the helper attributes that make this possible:
 /// https://docs.rs/thiserror
-// TODO: add the right derive and helper attributes on the enum and its variants
-#[derive(Debug)]
+#[derive(Debug, thiserror::Error)]
 pub enum AppError {
+    #[error("resource not found")]
     NotFound,
+    #[error("invalid input: {msg}")]
     InvalidInput { msg: String },
-    Internal(std::io::Error),
+    #[error("internal error")]
+    Internal(#[from] std::io::Error),
 }
 
 #[cfg(test)]
