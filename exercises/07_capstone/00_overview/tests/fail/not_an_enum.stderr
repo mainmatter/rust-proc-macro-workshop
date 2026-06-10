@@ -1,0 +1,7 @@
+error: StateMachine can only be derived for enums
+ --> tests/fail/not_an_enum.rs:6:1
+  |
+6 | / struct TrafficLight {
+7 | |     red: bool,
+8 | | }
+  | |_^

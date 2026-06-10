@@ -46,3 +46,5 @@
   - [Graceful error handling](06_attribute/02_graceful_errors.md)
   - [Parsing attribute arguments with `darling`](06_attribute/03_darling_args.md)
   - [Building a `#[retry]` attribute](06_attribute/04_retry.md)
+
+- [Putting it all together](07_capstone/00_overview.md)

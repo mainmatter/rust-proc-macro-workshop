@@ -572,6 +572,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "state-machine-exercise"
+version = "0.1.0"
+dependencies = [
+ "state-machine-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "state-machine-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "strsim"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"

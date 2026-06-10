@@ -1,0 +1,6 @@
+error: only one variant may be marked `#[initial]`
+  --> tests/fail/duplicate_initial.rs:9:5
+   |
+ 9 | /     #[initial]
+10 | |     Green,
+   | |_________^
