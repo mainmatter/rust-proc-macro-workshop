@@ -12,6 +12,15 @@ for your own types. A `Parse` impl is handed a
 [`ParseStream`](https://docs.rs/syn/latest/syn/parse/type.ParseStream.html) — a cursor over the
 remaining tokens — and pulls items off it one at a time, in the order your grammar dictates.
 
+> **Why not `darling` here?** In chapter 4 you used [`darling`](https://docs.rs/darling) to parse a
+> derive's attributes, and in chapter 6 you'll use it again for an attribute macro's arguments. It
+> doesn't apply to the macros in this chapter, though: `darling` only understands the attribute
+> _meta-list_ grammar (`key = value`, flags), but a function-like macro receives _arbitrary_
+> tokens. For custom syntax like `=>`, custom keywords, or anything that isn't a `key = value` list,
+> you write a `Parse` impl by hand — that's what the rest of this chapter does. The one exception:
+> if your macro's input _is_ just a `key = value` list, you can reuse the `FromMeta` approach from
+> chapter 6 verbatim.
+
 ## A worked example: `hashmap!`
 
 Let's parse a small DSL: a map literal whose entries are written `key => value`.
