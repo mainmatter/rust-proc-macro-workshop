@@ -52,13 +52,29 @@ fn model_impl(input: &DeriveInput) -> darling::Result<proc_macro2::TokenStream> 
     // schema above; `?` turns any attribute error into a `darling::Error`.
     let opts = ModelOpts::from_derive_input(input)?;
 
-    // TODO: build the `impl` block from the parsed `opts`:
-    //   - `opts.ident` is the struct name.
-    //   - `opts.table` is the (already-defaulted) table name.
-    //   - `opts.data.take_struct()` yields the fields. `supports(struct_named)`
-    //     guarantees a struct, so it's safe to `.expect(..)`.
-    //   - a field's column name is its `rename` if set, otherwise its `ident`.
-    //   Generate `table_name()` and `columns()` to match `examples/model.rs`.
-    let _ = opts;
-    todo!()
+    let ident = &opts.ident;
+    let table = &opts.table;
+
+    let fields = opts
+        .data
+        .take_struct()
+        .expect("supports(struct_named) guarantees a struct");
+
+    let columns = fields.iter().map(|field| match &field.rename {
+        Some(rename) => rename.clone(),
+        None => field.ident.as_ref().unwrap().to_string(),
+    });
+
+    Ok(quote! {
+        #[automatically_derived]
+        impl #ident {
+            pub fn table_name() -> &'static str {
+                #table
+            }
+
+            pub fn columns() -> Vec<&'static str> {
+                vec![ #(#columns),* ]
+            }
+        }
+    })
 }

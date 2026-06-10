@@ -36,16 +36,10 @@ fn getters_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     for field in fields.named.iter() {
         if is_unit_type(&field.ty) {
             let fname = field.ident.as_ref().unwrap();
-            // TODO: return an `Err` for this `()`-typed field. It must match the
-            //   shipped snapshot `tests/fail/unit_field.stderr` — message *and*
-            //   span. Open that file: its first line is the exact message your
-            //   `syn::Error` has to produce (it names the field, `fname`), and the
-            //   `^^^^` underline shows where the span must land. Notice it underlines
-            //   only the `()` itself (not the whole struct, and not `marker: ()`):
-            //   pick the node you hand to `new_spanned` so the `^^^^` lands exactly
-            //   there.
-            let _ = fname;
-            todo!()
+            return Err(syn::Error::new_spanned(
+                &field.ty,
+                format!("Getters can't generate a getter for the `()`-typed field `{fname}`"),
+            ));
         }
     }
 

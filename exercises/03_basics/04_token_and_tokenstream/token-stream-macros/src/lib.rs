@@ -26,11 +26,28 @@ pub fn ident_count(input: TokenStream) -> TokenStream {
 /// Count the total number of `Ident` tokens in a `TokenStream`,
 /// recursing into groups.
 fn count_idents(stream: TokenStream) -> usize {
-    todo!()
+    stream
+        .into_iter()
+        .map(|tree| match tree {
+            TokenTree::Ident(_) => 1,
+            TokenTree::Group(g) => count_idents(g.stream()),
+            _ => 0,
+        })
+        .sum()
 }
 
 /// Find the struct name by looking for the first `Ident` after the
 /// "struct" keyword.
 fn find_struct_name(stream: TokenStream) -> String {
-    todo!()
+    let mut iter = stream.into_iter();
+    while let Some(tree) = iter.next() {
+        if let TokenTree::Ident(ident) = &tree {
+            if ident.to_string() == "struct" {
+                if let Some(TokenTree::Ident(name)) = iter.next() {
+                    return name.to_string();
+                }
+            }
+        }
+    }
+    panic!("expected a struct")
 }

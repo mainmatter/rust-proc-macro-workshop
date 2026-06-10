@@ -76,20 +76,47 @@ fn builder_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
         //   - required field: it must be present by now, so clone it, convert a
         //     missing (`None`) value into an error that names the field, and let
         //     `?` propagate it out of `build()`.
-        let build_field: proc_macro2::TokenStream = todo!();
+        let build_field: proc_macro2::TokenStream = if optional.is_some() {
+            // Already an `Option`, clone it straight through.
+            quote! { #ident: self.#ident.clone(), }
+        } else {
+            let error = format!("field `{ident}` is not set");
+            quote! {
+                #ident: self.#ident.clone().ok_or_else(
+                    || -> ::std::boxed::Box<dyn ::std::error::Error> { #error.into() }
+                )?,
+            }
+        };
         build_fields.push(build_field);
     }
 
-    // TODO: assemble and return the generated code, splicing the per-field pieces
-    //   collected above with the `#(...)*` repetition syntax. You need:
-    //   - a `pub struct #builder_name { ... }` holding the builder fields;
-    //   - an `impl #name` with a `builder()` constructor that returns an all-unset
-    //     builder;
-    //   - an `impl #builder_name` carrying the setters and a fallible
-    //     `build(&mut self) -> Result<#name, Box<dyn Error>>` that constructs
-    //     `#name` from the per-field `build` expressions.
-    //   Use absolute paths throughout.
-    Ok(quote! {})
+    Ok(quote! {
+        pub struct #builder_name {
+            #(#builder_fields)*
+        }
+
+        #[automatically_derived]
+        impl #name {
+            pub fn builder() -> #builder_name {
+                #builder_name {
+                    #(#builder_init)*
+                }
+            }
+        }
+
+        #[automatically_derived]
+        impl #builder_name {
+            #(#setters)*
+
+            pub fn build(
+                &mut self,
+            ) -> ::std::result::Result<#name, ::std::boxed::Box<dyn ::std::error::Error>> {
+                ::std::result::Result::Ok(#name {
+                    #(#build_fields)*
+                })
+            }
+        }
+    })
 }
 
 /// If `ty` is `Option<U>`, returns `Some(U)`; otherwise `None`.

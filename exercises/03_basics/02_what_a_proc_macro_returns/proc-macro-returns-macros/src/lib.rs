@@ -8,5 +8,13 @@ use proc_macro::TokenStream;
 /// example in the book section shows the shape of the code you need to return.
 #[proc_macro_derive(TypeName)]
 pub fn type_name(_input: TokenStream) -> TokenStream {
-    todo!()
+    r#"
+    impl Greeting {
+        pub fn type_name() -> &'static str {
+            "Greeting"
+        }
+    }
+    "#
+    .parse()
+    .unwrap()
 }

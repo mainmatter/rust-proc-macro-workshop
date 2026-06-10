@@ -5,12 +5,11 @@
 /// from the user's perspective — you'll be building your own from
 /// the next section onwards.
 
-// TODO: Derive `derive_more::Display` and add a `#[display("...")]` attribute to
-//       each variant. The format string can reference the variant's fields by name,
-//       e.g. `{radius}` (see the tests for the exact wording each variant should produce).
-#[derive(Debug)]
+#[derive(Debug, derive_more::Display)]
 pub enum Shape {
+    #[display("circle with radius {radius}")]
     Circle { radius: f64 },
+    #[display("rectangle {width}x{height}")]
     Rectangle { width: f64, height: f64 },
 }
 

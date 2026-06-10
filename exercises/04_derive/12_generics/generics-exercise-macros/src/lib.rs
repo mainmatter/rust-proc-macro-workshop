@@ -38,11 +38,15 @@ fn empty_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     // Start from the type's own generics.
     let mut generics = input.generics.clone();
 
-    // TODO: the generated `empty()` calls `Default::default()` on each field, so
-    //   every *type* parameter needs a `::core::default::Default` bound — or the
-    //   code won't compile for `struct Wrapper<T>`. The book added a `Debug` bound
-    //   the same way: iterate `generics.params`, match the type-parameter case,
-    //   and push the bound onto it. Leave lifetimes and const parameters alone.
+    // The generated `empty()` calls `Default::default()` on each field, so every
+    // type parameter needs a `Default` bound. Leave lifetimes and const params alone.
+    for param in &mut generics.params {
+        if let GenericParam::Type(type_param) = param {
+            type_param
+                .bounds
+                .push(parse_quote!(::core::default::Default));
+        }
+    }
 
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
 

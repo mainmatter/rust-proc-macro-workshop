@@ -17,14 +17,12 @@ pub fn describe(_attr: TokenStream, item: TokenStream) -> TokenStream {
     match describe_impl(&func) {
         Ok(tokens) => tokens.into(),
         Err(err) => {
-            // TODO: graceful error handling. We have a `syn::Error` *and* the original
-            //   `func`. Turn the error into a `compile_error!` with `err.to_compile_error()`,
-            //   and emit it together with the original `#func` (via `quote!`) so the
-            //   function stays present for tooling. The `tests/fail` snapshot checks that
-            //   misuse produces this clean, spanned diagnostic — not the `todo!()` panic
-            //   ("custom attribute panicked") the stub starts with.
-            let _ = (&err, &func);
-            todo!()
+            let compile_error = err.to_compile_error();
+            quote! {
+                #compile_error
+                #func
+            }
+            .into()
         }
     }
 }

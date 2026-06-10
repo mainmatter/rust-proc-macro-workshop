@@ -26,8 +26,16 @@ impl Parse for Route {
         //     4. the handler as an `Ident`,
         //   then build the `Route`. Section 02's `Entry` `Parse` impl shows the same
         //   read-tokens-in-order shape.
-        let _ = input;
-        todo!()
+        let method: Ident = input.parse()?;
+        let path: LitStr = input.parse()?;
+        input.parse::<Token![=>]>()?;
+        let handler: Ident = input.parse()?;
+
+        Ok(Route {
+            method,
+            path,
+            handler,
+        })
     }
 }
 
@@ -71,6 +79,21 @@ fn routes_impl(routes: &Punctuated<Route, Token![,]>) -> proc_macro2::TokenStrea
     //   `routes.iter()` to build the arms, splice them into the closure body with
     //   `quote!`'s `#( ... )*` repetition, and fall through to `None`.
     //   Reach for absolute paths (chapter 4) so the output compiles in any context.
-    let _ = routes;
-    todo!()
+    let arms = routes.iter().map(|route| {
+        let method = route.method.to_string();
+        let path = &route.path;
+        let handler = &route.handler;
+        quote! {
+            if method == #method && path == #path {
+                return ::core::option::Option::Some(#handler());
+            }
+        }
+    });
+
+    quote! {
+        |method: &str, path: &str| -> ::core::option::Option<::std::string::String> {
+            #(#arms)*
+            ::core::option::Option::None
+        }
+    }
 }

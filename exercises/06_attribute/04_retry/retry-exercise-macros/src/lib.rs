@@ -1,6 +1,7 @@
 use darling::{FromMeta, ast::NestedMeta};
 use proc_macro::TokenStream;
-use syn::{ItemFn, parse_macro_input};
+use quote::quote;
+use syn::{Block, ItemFn, parse_macro_input, parse_quote};
 
 /// The capstone: `#[retry(times = 3, delay_ms = 100)]`. It wraps a function that
 /// returns a `Result` so that, on `Err`, it tries again — up to `times` attempts,
@@ -51,6 +52,29 @@ pub fn retry(attr: TokenStream, item: TokenStream) -> TokenStream {
     //   Assign the new block to `func.block` (a `Box<syn::Block>`) and return
     //   `quote!(#func).into()`. Use absolute paths (`::core::result::Result`, etc.)
     //   as you did in chapter 4.
-    let _ = (&mut func, args.times, args.delay_ms);
-    todo!()
+    let times = args.times;
+    let delay_ms = args.delay_ms;
+    let output = &func.sig.output;
+    let block = &func.block;
+
+    let new_block: Block = parse_quote! {{
+        let mut attempt: u32 = 0;
+        loop {
+            attempt += 1;
+            match (|| #output #block)() {
+                ::core::result::Result::Ok(value) => {
+                    return ::core::result::Result::Ok(value);
+                }
+                ::core::result::Result::Err(err) => {
+                    if attempt >= #times {
+                        return ::core::result::Result::Err(err);
+                    }
+                    ::std::thread::sleep(::std::time::Duration::from_millis(#delay_ms));
+                }
+            }
+        }
+    }};
+    func.block = Box::new(new_block);
+
+    quote!(#func).into()
 }

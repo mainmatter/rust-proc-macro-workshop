@@ -10,18 +10,16 @@
 
 use serde::{Deserialize, Serialize};
 
-// TODO: add a container attribute so every field serializes in camelCase
-//   (e.g. `first_name` -> `firstName`).
 #[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct User {
     pub first_name: String,
     pub last_name: String,
 
-    // TODO: add a field attribute renaming this field to `email` in the JSON.
+    #[serde(rename = "email")]
     pub email_address: String,
 
-    // TODO: add a field attribute so this field defaults to `false` when it is
-    //   missing during deserialization.
+    #[serde(default)]
     pub is_admin: bool,
 }
 

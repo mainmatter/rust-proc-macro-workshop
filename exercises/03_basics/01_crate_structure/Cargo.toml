@@ -3,6 +3,5 @@ name = "crate-structure-exercise"
 version = "0.1.0"
 edition = "2024"
 
-# TODO: Add a dependency on the proc-macro crate you'll create in the
-#       `crate-structure-exercise-macros/` subdirectory.
 [dependencies]
+crate-structure-exercise-macros = { path = "crate-structure-exercise-macros" }

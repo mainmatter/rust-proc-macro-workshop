@@ -1,0 +1,5 @@
+error: Getters can't generate a getter for the `()`-typed field `marker`
+ --> tests/fail/unit_field.rs:6:13
+  |
+6 |     marker: (),
+  |             ^^

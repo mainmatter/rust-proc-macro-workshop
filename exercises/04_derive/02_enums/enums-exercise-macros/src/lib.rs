@@ -33,16 +33,12 @@ fn ordinal_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
             .map(|(index, variant)| -> proc_macro2::TokenStream {
                 let vname = &variant.ident;
 
-                // TODO: produce this variant's match arm, of the form
-                //   `<pattern> => <index>,`.
-                //   - The pattern has to match the variant *and ignore whatever
-                //     payload it carries*, so its shape depends on `variant.fields`
-                //     — a unit, tuple, or struct variant each needs a different
-                //     pattern. The book's `as_str` example shows how to handle the
-                //     three shapes; apply the same idea here.
-                //   - The arm body is `index`, the variant's 0-based position.
-                let _ = (index, vname);
-                todo!()
+                let pattern = match &variant.fields {
+                    Fields::Unit => quote! { #name::#vname },
+                    Fields::Unnamed(_) => quote! { #name::#vname(..) },
+                    Fields::Named(_) => quote! { #name::#vname { .. } },
+                };
+                quote! { #pattern => #index, }
             });
 
     quote! {

@@ -1,0 +1,7 @@
+error: proc-macro derive panicked
+ --> tests/fail/enum.rs:3:10
+  |
+3 | #[derive(FieldNames)]
+  |          ^^^^^^^^^^
+  |
+  = help: message: FieldNames only supports structs

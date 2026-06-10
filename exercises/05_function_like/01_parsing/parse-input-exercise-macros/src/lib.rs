@@ -29,6 +29,10 @@ fn avg_impl(args: Punctuated<Expr, Token![,]>) -> proc_macro2::TokenStream {
     //   - the generated code should sum the values and divide by the count.
     //   The book's `min!` example shows the same parse-then-`quote!` shape; here the
     //   new wrinkle is using the *number* of arguments in the generated code.
-    let _ = &args;
-    todo!()
+    let count = args.len();
+    let values = args.iter();
+
+    quote! {
+        (#( (#values) as f64 )+*) / (#count as f64)
+    }
 }
