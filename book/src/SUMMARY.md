@@ -34,3 +34,9 @@
   - [Parsing attributes with `darling`](03_derive/11_darling.md)
   - [Handling generics](03_derive/12_generics.md)
   - [Building a `#[derive(Builder)]`](03_derive/13_builder.md)
+
+- [Function-like macros](04_function_like/00_overview.md)
+  - [Parsing arbitrary token input](04_function_like/01_parsing_input.md)
+  - [Custom syntax](04_function_like/02_custom_syntax.md)
+  - [When to use function-like over declarative macros](04_function_like/03_when_to_use.md)
+  - [Building a simple DSL: `routes!`](04_function_like/04_routes_dsl.md)

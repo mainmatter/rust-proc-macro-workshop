@@ -86,6 +86,23 @@ name = "crate-structure-exercise"
 version = "0.1.0"
 
 [[package]]
+name = "custom-syntax-exercise"
+version = "0.1.0"
+dependencies = [
+ "custom-syntax-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "custom-syntax-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "darling"
 version = "0.20.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -181,6 +198,17 @@ dependencies = [
  "quote",
  "syn",
 ]
+
+[[package]]
+name = "fn-like-overview"
+version = "0.1.0"
+dependencies = [
+ "serde_json",
+]
+
+[[package]]
+name = "fn-like-when-to-use"
+version = "0.1.0"
 
 [[package]]
 name = "fnv"
@@ -297,6 +325,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "parse-input-exercise"
+version = "0.1.0"
+dependencies = [
+ "parse-input-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "parse-input-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "proc-macro-returns-exercise"
 version = "0.1.0"
 dependencies = [
@@ -352,6 +397,23 @@ dependencies = [
 [[package]]
 name = "re-export-exercise"
 version = "0.1.0"
+
+[[package]]
+name = "routes-exercise"
+version = "0.1.0"
+dependencies = [
+ "routes-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "routes-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "serde"

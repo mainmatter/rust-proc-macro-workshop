@@ -36,7 +36,7 @@
   - Building a #[derive(Builder)]
 
 - Function-like macros
-  - Why is println! a macro?
+  - Overview: why is println! a macro? (json! warm-up)
   - Parsing arbitrary token input
   - Custom syntax
   - When to use function-like over declarative macros

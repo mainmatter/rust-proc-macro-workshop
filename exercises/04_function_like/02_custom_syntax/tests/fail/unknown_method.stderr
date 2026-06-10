@@ -1,0 +1,5 @@
+error: expected `get` or `post`
+ --> tests/fail/unknown_method.rs:6:9
+  |
+6 |         delete "/users",
+  |         ^^^^^^
