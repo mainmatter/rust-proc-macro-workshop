@@ -64,9 +64,21 @@ Note the three pattern shapes — `Foo`, `Foo(..)`, and `Foo { .. }` — must ma
 declared shape exactly, or the generated `match` won't compile. `..` is doing the work of
 ignoring the payload in the tuple and struct cases.
 
-If instead you needed to _use_ the payload — say, to forward a field — you'd bind it: `Foo(x)`
-or `Foo { w, h }`, and reference those bindings in the arm body. We'll do exactly that when we
-build more advanced macros later.
+If instead you needed to _use_ the payload — say, to forward a field — you'd bind it instead of
+ignoring it, and reference those bindings in the arm body:
+
+```rust
+match &variant.fields {
+    Fields::Unit => quote! { #name::#vname => 0, },
+    // Bind the first tuple field as `x` and use it in the body.
+    Fields::Unnamed(_) => quote! { #name::#vname(x, ..) => x.count(), },
+    // Bind named fields by name.
+    Fields::Named(_) => quote! { #name::#vname { w, h, .. } => w * h, },
+}
+```
+
+The exercises in this workshop all _ignore_ the payload, but binding it is the same `Fields`
+match — you just write `Foo(x)` / `Foo { w, h }` instead of `Foo(..)` / `Foo { .. }`.
 
 ## Exercise
 

@@ -136,8 +136,10 @@ This is useful when your macro needs to generate new method or type names based 
 
 `quote!` has a variant, [`quote_spanned!`](https://docs.rs/quote/latest/quote/macro.quote_spanned.html),
 that lets you attach span information to the generated tokens. This controls where error
-messages point when the generated code fails to compile. We'll use it in later chapters when
-we cover error reporting and spans.
+messages point when the generated code fails to compile. We won't need it in this workshop —
+we report errors with `syn::Error` instead (chapter 4) — but it's a useful tool to know about
+when you want a compile error in your _generated_ code to point at a specific span in the
+user's source.
 
 ## Exercise
 
