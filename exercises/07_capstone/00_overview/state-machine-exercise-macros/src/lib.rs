@@ -77,8 +77,77 @@ fn parse_state_machine(input: &DeriveInput) -> syn::Result<StateMachine> {
     //
     //   Tip: collect the variant names *first*, then check transition targets against
     //   them — you can't know a target is unknown until you've seen every state.
-    let _ = input;
-    todo!()
+    let name = input.ident.clone();
+
+    // 1. The input must be an enum.
+    let Data::Enum(data) = &input.data else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "StateMachine can only be derived for enums",
+        ));
+    };
+
+    // 2. Every variant must be a unit variant. Collect the state names.
+    let mut variants = Vec::new();
+    for variant in &data.variants {
+        if !matches!(variant.fields, Fields::Unit) {
+            return Err(syn::Error::new_spanned(
+                variant,
+                "StateMachine states must be unit variants (no fields)",
+            ));
+        }
+        variants.push(variant.ident.clone());
+    }
+
+    // 3. Exactly one variant must carry `#[initial]`.
+    let mut initial: Option<Ident> = None;
+    for variant in &data.variants {
+        for attr in &variant.attrs {
+            if attr.path().is_ident("initial") {
+                if initial.is_some() {
+                    return Err(syn::Error::new_spanned(
+                        variant,
+                        "only one variant may be marked `#[initial]`",
+                    ));
+                }
+                initial = Some(variant.ident.clone());
+            }
+        }
+    }
+    let Some(initial) = initial else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "one variant must be marked `#[initial]`",
+        ));
+    };
+
+    // 4. Collect the `#[transition(..)]` edges, validating every target.
+    let mut transitions = Vec::new();
+    for variant in &data.variants {
+        let from = variant.ident.clone();
+        for attr in &variant.attrs {
+            if attr.path().is_ident("transition") {
+                let targets =
+                    attr.parse_args_with(Punctuated::<Ident, Token![,]>::parse_terminated)?;
+                for target in targets {
+                    if !variants.contains(&target) {
+                        return Err(syn::Error::new_spanned(
+                            &target,
+                            format!("unknown state `{target}`; not a variant of this enum"),
+                        ));
+                    }
+                    transitions.push((from.clone(), target));
+                }
+            }
+        }
+    }
+
+    Ok(StateMachine {
+        name,
+        variants,
+        initial,
+        transitions,
+    })
 }
 
 /// Turn a validated `StateMachine` into the generated code — the "emit the output"
@@ -107,6 +176,65 @@ fn generate(sm: &StateMachine) -> proc_macro2::TokenStream {
     //
     //   Build the repeated match arms by iterating `sm.variants` / `sm.transitions`
     //   into `quote! { .. }` fragments, then splice them with `#(#arms)*` (chapter 3).
-    let _ = sm;
-    todo!()
+    let name = &sm.name;
+    let initial = &sm.initial;
+    let error_name = format_ident!("{}InvalidTransition", name);
+
+    let name_arms = sm.variants.iter().map(|variant| {
+        let variant_str = variant.to_string();
+        quote! { #name::#variant => #variant_str, }
+    });
+
+    let transition_arms = sm.transitions.iter().map(|(from, to)| {
+        quote! { (#name::#from, #name::#to) => true, }
+    });
+
+    quote! {
+        #[derive(Debug)]
+        pub struct #error_name {
+            pub from: &'static str,
+            pub to: &'static str,
+        }
+
+        #[automatically_derived]
+        impl ::core::fmt::Display for #error_name {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                ::core::write!(f, "invalid transition from {} to {}", self.from, self.to)
+            }
+        }
+
+        #[automatically_derived]
+        impl ::std::error::Error for #error_name {}
+
+        #[automatically_derived]
+        impl #name {
+            pub fn initial() -> Self {
+                #name::#initial
+            }
+
+            pub fn name(&self) -> &'static str {
+                match self {
+                    #(#name_arms)*
+                }
+            }
+
+            pub fn can_transition_to(&self, target: &Self) -> bool {
+                match (self, target) {
+                    #(#transition_arms)*
+                    _ => false,
+                }
+            }
+
+            pub fn transition_to(self, target: Self) -> ::core::result::Result<Self, #error_name> {
+                if self.can_transition_to(&target) {
+                    ::core::result::Result::Ok(target)
+                } else {
+                    ::core::result::Result::Err(#error_name {
+                        from: self.name(),
+                        to: target.name(),
+                    })
+                }
+            }
+        }
+    }
 }

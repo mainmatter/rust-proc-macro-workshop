@@ -21,8 +21,17 @@ pub fn type_name(input: TokenStream) -> TokenStream {
 /// Hint: You can use `format!(...)` and `.parse().unwrap()` on a string to produce
 /// a `proc_macro2::TokenStream`.
 fn type_name_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
-    let _name = &input.ident;
-    todo!()
+    let name = &input.ident;
+
+    format!(
+        "impl {name} {{
+            pub fn type_name() -> &'static str {{
+                \"{name}\"
+            }}
+        }}"
+    )
+    .parse()
+    .unwrap()
 }
 
 #[cfg(test)]

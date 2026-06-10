@@ -6,8 +6,7 @@
 ///
 /// Hint: look at the `format!` macro.
 pub fn build_greeting(name: &str, age: u32) -> String {
-    // TODO: interpolate `name` and `age` into the greeting (see the test for the exact wording).
-    todo!()
+    format!("Hello, {name}! You are {age} years old.")
 }
 
 /// Use a macro to get the value of an environment variable at **compile time**.
@@ -15,9 +14,7 @@ pub fn build_greeting(name: &str, age: u32) -> String {
 ///
 /// Hint: look at the `env!` macro.
 pub fn package_name() -> &'static str {
-    // TODO: use `env!` to return the value of the "CARGO_PKG_NAME" variable,
-    //       which is set by Cargo at compile time.
-    todo!()
+    env!("CARGO_PKG_NAME")
 }
 
 /// Use a macro to embed the contents of a file as a `&'static str` at compile time.
@@ -25,8 +22,7 @@ pub fn package_name() -> &'static str {
 ///
 /// Hint: look at the `include_str!` macro.
 pub fn license_text() -> &'static str {
-    // TODO: embed "LICENSE.txt". Note the path is relative to this source file.
-    todo!()
+    include_str!("../LICENSE.txt")
 }
 
 /// Use a macro to concatenate string literals at compile time.
@@ -34,10 +30,7 @@ pub fn license_text() -> &'static str {
 ///
 /// Hint: look at the `concat!` macro.
 pub fn version_tag() -> &'static str {
-    // TODO: build a "v"-prefixed version tag (e.g. "v0.1.0") by concatenating a "v"
-    //       prefix with this crate's version. `env!` can give you the version that
-    //       Cargo defines at compile time; `concat!` can join the pieces.
-    todo!()
+    concat!("v", env!("CARGO_PKG_VERSION"))
 }
 
 #[cfg(test)]

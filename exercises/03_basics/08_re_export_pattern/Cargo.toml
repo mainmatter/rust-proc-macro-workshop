@@ -3,9 +3,8 @@ name = "re-export-exercise"
 version = "0.1.0"
 edition = "2024"
 
-# TODO: Add the `re-export-exercise-macros` crate (in the `re-export-exercise-macros/`
-#       subdirectory) as a dependency.
 [dependencies]
+re-export-exercise-macros = { path = "re-export-exercise-macros" }
 
 [dev-dependencies]
 pretty_assertions = { workspace = true }

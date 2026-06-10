@@ -31,8 +31,19 @@ impl Parse for Endpoint {
         //      `tests/fail/unknown_method.rs` snapshot checks for exactly that message.
         //   2. Parse the path that follows as a `LitStr`.
         //   The book's custom-keyword snippet shows the peek-then-parse pattern.
-        let _ = input;
-        todo!()
+        let method = if input.peek(kw::get) {
+            input.parse::<kw::get>()?;
+            "GET"
+        } else if input.peek(kw::post) {
+            input.parse::<kw::post>()?;
+            "POST"
+        } else {
+            return Err(input.error("expected `get` or `post`"));
+        };
+
+        let path: LitStr = input.parse()?;
+
+        Ok(Endpoint { method, path })
     }
 }
 

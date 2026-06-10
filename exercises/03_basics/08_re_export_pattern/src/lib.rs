@@ -2,6 +2,8 @@
 //       `Describe` derive macro can be imported from this single crate. The macro
 //       already lives in the `re-export-exercise-macros/` crate.
 
+pub use re_export_exercise_macros::Describe;
+
 pub trait SelfDescribe {
     fn describe(&self) -> &'static str;
 }

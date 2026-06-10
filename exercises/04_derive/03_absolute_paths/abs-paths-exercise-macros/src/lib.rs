@@ -26,8 +26,8 @@ fn type_name_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     quote! {
         #[automatically_derived]
         impl #name {
-            pub fn type_name(&self) -> String {
-                String::from(stringify!(#name))
+            pub fn type_name(&self) -> ::std::string::String {
+                ::std::string::String::from(stringify!(#name))
             }
         }
     }

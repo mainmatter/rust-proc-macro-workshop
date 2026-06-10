@@ -22,7 +22,11 @@ pub struct Hsl {
 //       you saw in the expanded output of `Rgb`.
 impl Clone for Hsl {
     fn clone(&self) -> Self {
-        todo!()
+        Hsl {
+            h: self.h.clone(),
+            s: self.s.clone(),
+            l: self.l.clone(),
+        }
     }
 }
 

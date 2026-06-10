@@ -10,14 +10,9 @@ use syn::{ItemFn, parse_macro_input};
 /// replacement for the item — so whatever we return *is* the function now.
 #[proc_macro_attribute]
 pub fn make_public(_attr: TokenStream, item: TokenStream) -> TokenStream {
-    let func = parse_macro_input!(item as ItemFn);
+    let mut func = parse_macro_input!(item as ItemFn);
 
-    // TODO: re-emit `func`, but with `pub` visibility.
-    //   - an attribute macro returns the *replacement* for the annotated item, so
-    //     whatever tokens you return become the function.
-    //   - overwrite `func.vis` with a `pub` visibility. `syn::parse_quote!(pub)`
-    //     builds the `syn::Visibility` node for you. (You'll need `func` to be `mut`.)
-    //   - turn the function back into tokens with `quote::quote!(#func)` and `.into()`.
-    let _ = &func;
-    todo!()
+    func.vis = syn::parse_quote!(pub);
+
+    quote::quote!(#func).into()
 }

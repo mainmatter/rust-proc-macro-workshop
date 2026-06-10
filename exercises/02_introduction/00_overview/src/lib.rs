@@ -8,7 +8,7 @@
 ///    That's four standard-library traits: two for equality and two for
 ///    ordering. The compiler will tell you if you forget one — sorting a
 ///    vector needs a total order, which builds on the others.
-// TODO: add the right derive attributes
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
 pub struct Version {
     pub major: u32,
     pub minor: u32,
@@ -17,7 +17,11 @@ pub struct Version {
 /// 2. Function-like macro: use `vec!` to build the release history below,
 ///    in this order: 1.0, then 1.1, then 2.0.
 pub fn release_history() -> Vec<Version> {
-    todo!()
+    vec![
+        Version { major: 1, minor: 0 },
+        Version { major: 1, minor: 1 },
+        Version { major: 2, minor: 0 },
+    ]
 }
 
 #[cfg(test)]

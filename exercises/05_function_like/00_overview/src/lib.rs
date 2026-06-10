@@ -20,13 +20,12 @@ use serde_json::Value;
 
 /// Build the JSON document the tests expect, using the `json!` macro.
 pub fn user_document() -> Value {
-    // TODO: use `serde_json::json!` to build an object with:
-    //   - "name": the string "Ada"
-    //   - "age": the number 36
-    //   - "languages": an array of the strings "Rust" and "Ada"
-    //   - "active": the boolean true
-    // The macro lets you write this almost exactly as you'd write the JSON itself.
-    todo!()
+    serde_json::json!({
+        "name": "Ada",
+        "age": 36,
+        "languages": ["Rust", "Ada"],
+        "active": true,
+    })
 }
 
 #[cfg(test)]

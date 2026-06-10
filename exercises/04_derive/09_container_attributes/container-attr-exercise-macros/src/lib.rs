@@ -47,12 +47,9 @@ fn extract_times(input: &DeriveInput) -> syn::Result<usize> {
         // Walk the comma-separated `key = value` pairs inside `repeat(...)`.
         attr.parse_nested_meta(|meta| {
             if meta.path.is_ident("times") {
-                // TODO: read the integer value of `times = N` into `times`.
-                //   `meta.value()?` gives you the parse stream after the `=`.
-                //   The book parsed a *string* (a `LitStr`, then `.value()`); here
-                //   the value is an integer, so parse the matching literal type and
-                //   convert it into a `usize`. Return `Ok(())` when done.
-                todo!()
+                let lit: syn::LitInt = meta.value()?.parse()?;
+                times = lit.base10_parse()?;
+                Ok(())
             } else {
                 Err(meta.error("unsupported repeat attribute; expected `times`"))
             }

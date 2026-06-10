@@ -26,25 +26,19 @@ fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
         panic!("FieldNames only supports named structs");
     };
 
-    // TODO: Rewrite this function to use `quote!` instead of `format!`.
-    //       Also add `#[automatically_derived]` to the generated `impl` block —
-    //       the book section explains why every derive-emitted impl should carry it.
-    let field_names_str = fields
+    let field_names = fields
         .named
         .iter()
-        .map(|f| format!("\"{}\"", f.ident.as_ref().unwrap()))
-        .collect::<Vec<_>>()
-        .join(", ");
+        .map(|f| f.ident.as_ref().unwrap().to_string());
 
-    format!(
-        "impl {name} {{
-            pub fn field_names() -> &'static [&'static str] {{
-                &[{field_names_str}]
-            }}
-        }}"
-    )
-    .parse()
-    .unwrap()
+    quote! {
+        #[automatically_derived]
+        impl #name {
+            pub fn field_names() -> &'static [&'static str] {
+                &[#(#field_names),*]
+            }
+        }
+    }
 }
 
 #[cfg(test)]
