@@ -1,0 +1,5 @@
+error: unknown state `Purple`; not a variant of this enum
+ --> tests/fail/unknown_target.rs:8:18
+  |
+8 |     #[transition(Purple)]
+  |                  ^^^^^^

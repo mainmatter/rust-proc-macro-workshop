@@ -1,0 +1,8 @@
+error: one variant must be marked `#[initial]`
+ --> tests/fail/missing_initial.rs:6:1
+  |
+6 | / enum TrafficLight {
+7 | |     Red,
+8 | |     Green,
+9 | | }
+  | |_^

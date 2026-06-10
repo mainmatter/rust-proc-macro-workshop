@@ -1,0 +1,6 @@
+error: StateMachine states must be unit variants (no fields)
+ --> tests/fail/variant_with_data.rs:7:5
+  |
+7 | /     #[initial]
+8 | |     Red(u8),
+  | |___________^
