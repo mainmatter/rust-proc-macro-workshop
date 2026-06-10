@@ -20,6 +20,75 @@ dependencies = [
 ]
 
 [[package]]
+name = "attr-args-exercise"
+version = "0.1.0"
+dependencies = [
+ "attr-args-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "attr-args-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "darling",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "attr-graceful-exercise"
+version = "0.1.0"
+dependencies = [
+ "attr-graceful-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "attr-graceful-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "attr-minimal-exercise"
+version = "0.1.0"
+dependencies = [
+ "attr-minimal-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "attr-minimal-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "attr-transform-exercise"
+version = "0.1.0"
+dependencies = [
+ "attr-transform-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "attr-transform-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "basics-overview"
 version = "0.1.0"
 dependencies = [
@@ -397,6 +466,24 @@ dependencies = [
 [[package]]
 name = "re-export-exercise"
 version = "0.1.0"
+
+[[package]]
+name = "retry-exercise"
+version = "0.1.0"
+dependencies = [
+ "retry-exercise-macros",
+ "trybuild",
+]
+
+[[package]]
+name = "retry-exercise-macros"
+version = "0.1.0"
+dependencies = [
+ "darling",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "routes-exercise"
