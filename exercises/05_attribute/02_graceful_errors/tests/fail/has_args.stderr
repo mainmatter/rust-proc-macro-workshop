@@ -1,0 +1,5 @@
+error: #[describe] only works on functions that take no arguments
+ --> tests/fail/has_args.rs:5:4
+  |
+5 | fn greet(name: &str) -> String {
+  |    ^^^^^

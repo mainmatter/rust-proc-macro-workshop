@@ -1,0 +1,7 @@
+error: Missing field `path`
+ --> tests/fail/missing_path.rs:4:1
+  |
+4 | #[endpoint(method = "POST")]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `endpoint` (in Nightly builds, run with -Z macro-backtrace for more info)

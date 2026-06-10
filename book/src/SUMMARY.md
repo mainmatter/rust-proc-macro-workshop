@@ -40,3 +40,9 @@
   - [Custom syntax](04_function_like/02_custom_syntax.md)
   - [When to use function-like over declarative macros](04_function_like/03_when_to_use.md)
   - [Building a simple DSL: `routes!`](04_function_like/04_routes_dsl.md)
+
+- [Attribute macros](05_attribute/00_overview.md)
+  - [Transforming a function](05_attribute/01_transform.md)
+  - [Graceful error handling](05_attribute/02_graceful_errors.md)
+  - [Parsing attribute arguments with `darling`](05_attribute/03_darling_args.md)
+  - [Building a `#[retry]` attribute](05_attribute/04_retry.md)

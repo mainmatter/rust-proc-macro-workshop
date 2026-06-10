@@ -42,7 +42,7 @@
   - When to use function-like over declarative macros
   - Building a simple DSL (routes!)
 
-- Attribute-like macros
+- Attribute macros
   - A minimal attribute macro
   - Transforming a function (e.g. adding a timing/logging wrapper)
   - Graceful error handling: re-emitting the original item to avoid cascading errors
