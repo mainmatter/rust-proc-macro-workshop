@@ -69,7 +69,7 @@ A `trybuild` test is a regular `#[test]` function that points at a directory of 
 #[test]
 fn tests() {
     let t = trybuild::TestCases::new();
-    t.pass("tests/pass/*.rs");
+    t.pass("examples/*.rs");
     t.compile_fail("tests/fail/*.rs");
 }
 ```
@@ -78,13 +78,16 @@ fn tests() {
 - **`compile_fail()`** — each file must fail to compile, and the error output must match a
   corresponding `.stderr` file.
 
+The conventional layout puts passing cases in `tests/pass/`, but in this workshop they live in
+`examples/` instead — the next section explains why.
+
 ## Test file structure
 
 Each test file is a self-contained Rust program. For testing a derive macro, a passing test
 might look like:
 
 ```rust
-// tests/pass/basic_struct.rs
+// examples/basic_struct.rs
 use my_macros::MyDerive;
 
 #[derive(MyDerive)]
@@ -100,18 +103,40 @@ fn main() {
 
 Note the `fn main()` — each test file is compiled as its own binary.
 
+## Inspecting the output with `cargo expand`
+
+Once a passing case compiles, you'll often want to _see_ what your macro actually expanded to —
+[`cargo expand`](../02_introduction/01_cargo_expand.md) is the tool for that. But `cargo expand`
+can only target things Cargo knows how to build: a library, a binary, a test, or an **example**. A
+file under `tests/pass/` is none of those — `trybuild` compiles it itself, in a throwaway crate, so
+there's no Cargo target to point `cargo expand` at.
+
+That's why, throughout this workshop, the passing cases live in `examples/` rather than the
+conventional `tests/pass/`. `trybuild` doesn't care where the files sit — `t.pass("examples/*.rs")`
+globs them just the same — but now each passing case is _also_ a real example target. So you can run:
+
+```bash
+cargo expand --example basic_struct
+```
+
+to see exactly what your macro generated for that input (and `cargo run --example basic_struct`
+runs it, `fn main()` and all).
+
+The compile-fail cases stay in `tests/fail/`: they're _meant_ not to compile, so they can't be
+examples — and there's nothing to expand anyway.
+
 ## Testing compilation failures
 
 For `compile_fail` tests, `trybuild` compares the compiler's error output against a `.stderr`
 file with the same name:
 
 ```text
+examples/
+└── basic_struct.rs        # a passing case — also `cargo expand --example basic_struct`
 tests/
-├── fail/
-│   ├── not_a_struct.rs
-│   └── not_a_struct.stderr
-└── pass/
-    └── basic_struct.rs
+└── fail/
+    ├── not_a_struct.rs
+    └── not_a_struct.stderr
 ```
 
 On the first run, if no `.stderr` file exists, `trybuild` shows the actual compiler output and
@@ -135,5 +160,7 @@ compilation and expected error messages.
 
 ## Exercise
 
-Write `trybuild` tests for the `FieldNames` derive macro you built in the previous exercise.
-Add both a passing test (a named struct) and a compile-fail test (using the macro on an enum).
+Write `trybuild` tests for the `FieldNames` derive macro you built in the previous exercise. Add a
+passing case in `examples/` (a named struct) and a compile-fail case in `tests/fail/` (using the
+macro on an enum). Once the passing case compiles, run `cargo expand --example <name>` on it to see
+the `field_names()` method your macro generated.

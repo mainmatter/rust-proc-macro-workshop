@@ -76,7 +76,7 @@ the parsed routes into the matching closure shown above — build one match arm 
 over the list, splice the arms into the closure body, and fall through to `None`. Reach for the
 absolute paths you learned in chapter 4 so the generated code never collides with names in the
 caller's scope. `tests/fail/missing_arrow.rs` checks your parser rejects a missing `=>`, and
-`tests/pass/router.rs` checks the whole macro — make them both pass.
+`examples/router.rs` checks the whole macro — make them both pass.
 
 > **Going further.** Real routers do more: matching path parameters like `/users/:id` and handing
 > them to the handler, supporting a fallback/404 handler, or grouping routes under a shared prefix.

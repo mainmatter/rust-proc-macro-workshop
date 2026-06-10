@@ -79,5 +79,5 @@ code that sums them and divides by the count.
 
 The twist over `min!` is that you need the _number_ of arguments in your generated code — it's the
 divisor. `Punctuated` is a collection, so its length is a method call away; emit that count as part
-of the output. Make `tests/pass/basic.rs` pass. (The empty-input case, `avg!()`, is already handled
+of the output. Make `examples/basic.rs` pass. (The empty-input case, `avg!()`, is already handled
 for you with a `compile_error!` and checked by `tests/fail/empty.rs`.)

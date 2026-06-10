@@ -19,7 +19,7 @@ fn type_name_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
 
     // TODO: this generated code uses the bare name `String`, which resolves to
     //   whatever `String` means at the *call site*. If the user shadowed it
-    //   (see `tests/pass/shadowed.rs`), this breaks.
+    //   (see `examples/shadowed.rs`), this breaks.
     //
     //   Fix it by referring to the standard library type by its absolute path.
     //   Make both the return type and the constructor call use the absolute path.

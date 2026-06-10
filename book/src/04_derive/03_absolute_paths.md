@@ -82,5 +82,5 @@ capstone in the last section does.
 ## Exercise
 
 The `TypeName` derive macro generates a `type_name()` method, but it refers to `String` by its
-bare name. `tests/pass/shadowed.rs` shadows `String` and currently fails to compile. Fix the
+bare name. `examples/shadowed.rs` shadows `String` and currently fails to compile. Fix the
 macro to use absolute paths so both passing tests compile.

@@ -58,4 +58,4 @@ The key moves:
 Apply the same wrap-the-body technique to _transform the result_. Write `#[trimmed]`: it takes a
 `String`-returning function and rewrites the body so the returned string is trimmed of surrounding
 whitespace. Capture the original body's value, post-process it, and return the new value — leaving
-the function's signature and arguments exactly as they were. Make `tests/pass/trim.rs` pass.
+the function's signature and arguments exactly as they were. Make `examples/trim.rs` pass.

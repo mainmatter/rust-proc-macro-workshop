@@ -137,7 +137,7 @@ pass between them, and the one-line glue that wires them together. Both halves a
    `format_ident!`), its `Display`/`Error` impls written with absolute paths, and the four methods,
    their match arms built by iterating the variants and edges.
 
-The inline `TODO`s spell out each rule and which API to reach for. Make `tests/pass/traffic_light.rs`
+The inline `TODO`s spell out each rule and which API to reach for. Make `examples/traffic_light.rs`
 pass and every file in `tests/fail/` produce its expected compiler error.
 
 > **Going further.** A state machine is fertile ground for extensions, each a small reuse of a

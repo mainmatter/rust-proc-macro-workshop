@@ -58,7 +58,7 @@ fn model_impl(input: &DeriveInput) -> darling::Result<proc_macro2::TokenStream> 
     //   - `opts.data.take_struct()` yields the fields. `supports(struct_named)`
     //     guarantees a struct, so it's safe to `.expect(..)`.
     //   - a field's column name is its `rename` if set, otherwise its `ident`.
-    //   Generate `table_name()` and `columns()` to match `tests/pass/model.rs`.
+    //   Generate `table_name()` and `columns()` to match `examples/model.rs`.
     let _ = opts;
     todo!()
 }
