@@ -8,7 +8,9 @@ and capture the output — which is exactly what `trybuild`'s `compile_fail` mod
 
 ## `compile_fail` and `.stderr` snapshots
 
-You met `trybuild` in chapter 3. The other half of its API is `compile_fail`:
+In chapter 3 your `compile_fail` case captured a raw _panic_. Now you'll use the same
+`compile_fail` API to snapshot _intentional_ diagnostics — the spanned `syn::Error`s you just
+built:
 
 ```rust
 #[test]
