@@ -1,0 +1,7 @@
+error: avg! needs at least one argument
+ --> tests/fail/empty.rs:5:13
+  |
+5 |     let _ = avg!();
+  |             ^^^^^^
+  |
+  = note: this error originates in the macro `avg` (in Nightly builds, run with -Z macro-backtrace for more info)

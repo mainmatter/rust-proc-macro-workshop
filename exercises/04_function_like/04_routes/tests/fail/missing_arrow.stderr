@@ -1,0 +1,5 @@
+error: expected `=>`
+  --> tests/fail/missing_arrow.rs:11:17
+   |
+11 |         GET "/" index,
+   |                 ^^^^^

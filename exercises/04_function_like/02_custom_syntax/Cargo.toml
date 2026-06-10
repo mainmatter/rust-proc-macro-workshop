@@ -1,0 +1,10 @@
+[package]
+name = "custom-syntax-exercise"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+custom-syntax-exercise-macros = { path = "macros" }
+
+[dev-dependencies]
+trybuild = { workspace = true }
