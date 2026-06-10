@@ -101,17 +101,17 @@ technique, not transcribe it.
   per-field validation) won't be caught by it. Those checks usually live in the **macros crate's**
   `#[cfg(test)]` unit tests — which `cargo test -p <consumer>` does NOT run. When that's the case,
   add a per-exercise `.wr.toml` + `check.sh` that tests both packages
-  (`cargo test -p <consumer> -p <consumer>-macros`), as `02_basics/08_quote` does.
+  (`cargo test -p <consumer> -p <consumer>-macros`), as `03_basics/08_quote` does.
 
 ## Testing with `trybuild`
 
-From chapter 3 onwards, exercises should use `trybuild` for testing macro output. Each exercise
+From chapter 4 onwards, exercises should use `trybuild` for testing macro output. Each exercise
 should include:
 
 - `tests/pass/*.rs` — files that must compile and run successfully.
 - `tests/fail/*.rs` — files that must fail to compile, with matching `.stderr` snapshots.
 
-`trybuild` is introduced in chapter 2 (`02_basics/09_trybuild`). Exercises in chapters 1 and 2
+`trybuild` is introduced in chapter 3 (`03_basics/09_trybuild`). Exercises in chapters 2 and 3
 use inline `#[cfg(test)]` tests instead.
 
 ## Solutions
