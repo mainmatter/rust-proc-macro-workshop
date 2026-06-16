@@ -90,4 +90,4 @@ Enjoy the course!
 
 ## Author
 
-This course was written by [Mainmatter](https://mainmatter.com/rust-consulting/).
+Authored by Guillaume Desmottes for [Mainmatter](https://mainmatter.com/rust-consulting/).
