@@ -36,10 +36,10 @@
   - [Building a `#[derive(Builder)]`](04_derive/13_builder.md)
 
 - [Function-like macros](05_function_like/00_overview.md)
-  - [Parsing arbitrary token input](05_function_like/01_parsing_input.md)
+  - [Parsing arbitrary token input](05_function_like/01_parsing.md)
   - [Custom syntax](05_function_like/02_custom_syntax.md)
   - [When to use function-like over declarative macros](05_function_like/03_when_to_use.md)
-  - [Building a simple DSL: `routes!`](05_function_like/04_routes_dsl.md)
+  - [Building a simple DSL: `routes!`](05_function_like/04_routes.md)
 
 - [Attribute macros](06_attribute/00_overview.md)
   - [Transforming a function](06_attribute/01_transform.md)
