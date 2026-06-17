@@ -1,13 +1,6 @@
-// TODO: Re-export the `Describe` derive macro from the `re-export-exercise-macros`
-//       crate so that users of this crate can write:
-//
-//           use re_export_exercise::Describe;
-//           #[derive(Describe)]
-//           struct Foo;
-//
-//       Steps:
-//       1. Add `re-export-exercise-macros` as a dependency in Cargo.toml.
-//       2. Add a `pub use` statement here to re-export the derive macro.
+// TODO: Wire up the facade pattern so that both the `SelfDescribe` trait and the
+//       `Describe` derive macro can be imported from this single crate. The macro
+//       already lives in the `re-export-exercise-macros/` crate.
 
 pub trait SelfDescribe {
     fn describe(&self) -> &'static str;
