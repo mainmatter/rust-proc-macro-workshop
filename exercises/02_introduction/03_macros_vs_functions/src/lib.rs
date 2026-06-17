@@ -6,7 +6,7 @@
 ///
 /// Hint: look at the `format!` macro.
 pub fn build_greeting(name: &str, age: u32) -> String {
-    // TODO: use `format!` to return "Hello, {name}! You are {age} years old."
+    // TODO: interpolate `name` and `age` into the greeting (see the test for the exact wording).
     todo!()
 }
 
@@ -25,8 +25,7 @@ pub fn package_name() -> &'static str {
 ///
 /// Hint: look at the `include_str!` macro.
 pub fn license_text() -> &'static str {
-    // TODO: use `include_str!` to embed the contents of "LICENSE.txt".
-    //       The path is relative to this source file, so you need "../LICENSE.txt".
+    // TODO: embed "LICENSE.txt". Note the path is relative to this source file.
     todo!()
 }
 
@@ -35,8 +34,9 @@ pub fn license_text() -> &'static str {
 ///
 /// Hint: look at the `concat!` macro.
 pub fn version_tag() -> &'static str {
-    // TODO: use `concat!` to produce "v1.0.0"
-    //       by concatenating "v", "1", ".", "0", ".", "0"
+    // TODO: build a "v"-prefixed version tag (e.g. "v0.1.0") by concatenating a "v"
+    //       prefix with this crate's version. `env!` can give you the version that
+    //       Cargo defines at compile time; `concat!` can join the pieces.
     todo!()
 }
 
@@ -66,6 +66,6 @@ mod tests {
 
     #[test]
     fn version() {
-        assert_eq!(version_tag(), "v1.0.0");
+        assert_eq!(version_tag(), "v0.1.0");
     }
 }
