@@ -7,4 +7,5 @@ edition = "2024"
 abs-paths-exercise-macros = { path = "abs-paths-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

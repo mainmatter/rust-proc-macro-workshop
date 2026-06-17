@@ -1,4 +1,5 @@
 use attr_transform_exercise::trimmed;
+use pretty_assertions::assert_eq;
 
 #[trimmed]
 fn padded() -> String {

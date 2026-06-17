@@ -1,4 +1,5 @@
 use attr_graceful_exercise::describe;
+use pretty_assertions::assert_eq;
 
 #[describe]
 fn ping() -> &'static str {

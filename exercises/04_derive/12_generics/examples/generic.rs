@@ -1,4 +1,5 @@
 use generics_exercise::Empty;
+use pretty_assertions::assert_eq;
 
 // A type parameter `T`: the generated code must add a `Default` bound on `T` and
 // repeat `<T>` on the impl.

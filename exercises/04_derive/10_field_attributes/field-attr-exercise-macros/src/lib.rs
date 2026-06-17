@@ -78,6 +78,7 @@ fn column_name(field: &Field) -> syn::Result<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
     use syn::parse_str;
 
     fn first_field(src: &str) -> Field {

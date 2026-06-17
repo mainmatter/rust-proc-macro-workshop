@@ -7,4 +7,5 @@ edition = "2024"
 attr-graceful-exercise-macros = { path = "attr-graceful-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

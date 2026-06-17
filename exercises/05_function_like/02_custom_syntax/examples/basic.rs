@@ -1,4 +1,5 @@
 use custom_syntax_exercise::methods;
+use pretty_assertions::assert_eq;
 
 fn main() {
     let routes = methods! {

@@ -1,4 +1,5 @@
 use name_clashes_exercise::Accessors;
+use pretty_assertions::assert_eq;
 
 #[derive(Accessors)]
 struct Point {

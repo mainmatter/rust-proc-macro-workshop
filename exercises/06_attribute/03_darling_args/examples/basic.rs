@@ -1,4 +1,5 @@
 use attr_args_exercise::endpoint;
+use pretty_assertions::assert_eq;
 
 #[endpoint(path = "/users", method = "POST")]
 fn create() {}

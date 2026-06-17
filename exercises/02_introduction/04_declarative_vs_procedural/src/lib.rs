@@ -50,6 +50,7 @@ macro_rules! hashmap {
 
 #[cfg(test)]
 mod tests {
+    use pretty_assertions::assert_eq;
     use std::collections::HashMap;
 
     #[test]

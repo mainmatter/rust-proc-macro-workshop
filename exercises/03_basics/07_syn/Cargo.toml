@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 syn-exercise-macros = { path = "syn-exercise-macros" }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

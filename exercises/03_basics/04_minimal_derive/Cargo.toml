@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 minimal-derive-macros = { path = "minimal-derive-macros" }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

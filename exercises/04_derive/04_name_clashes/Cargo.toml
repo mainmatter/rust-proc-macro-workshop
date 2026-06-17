@@ -7,4 +7,5 @@ edition = "2024"
 name-clashes-exercise-macros = { path = "name-clashes-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

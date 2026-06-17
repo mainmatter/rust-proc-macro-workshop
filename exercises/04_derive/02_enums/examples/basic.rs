@@ -1,4 +1,5 @@
 use enums_exercise::Ordinal;
+use pretty_assertions::assert_eq;
 
 #[derive(Ordinal)]
 enum Shape {

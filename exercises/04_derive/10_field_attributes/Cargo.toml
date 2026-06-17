@@ -7,4 +7,5 @@ edition = "2024"
 field-attr-exercise-macros = { path = "field-attr-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

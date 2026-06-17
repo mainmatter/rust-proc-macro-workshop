@@ -7,4 +7,5 @@ edition = "2024"
 retry-exercise-macros = { path = "retry-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

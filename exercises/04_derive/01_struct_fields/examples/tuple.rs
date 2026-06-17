@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use struct_fields_exercise::DebugFields;
 
 #[derive(DebugFields)]

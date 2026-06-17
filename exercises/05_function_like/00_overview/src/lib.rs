@@ -32,6 +32,7 @@ pub fn user_document() -> Value {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
 
     #[test]
     fn has_the_expected_shape() {

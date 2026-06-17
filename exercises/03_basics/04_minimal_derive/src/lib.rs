@@ -14,6 +14,7 @@ struct Baz(u8, u8);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
 
     #[test]
     fn foo_type_name() {

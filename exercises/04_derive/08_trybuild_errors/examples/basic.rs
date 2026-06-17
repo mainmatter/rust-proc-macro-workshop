@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use trybuild_errors_exercise::Getters;
 
 #[derive(Getters)]

@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use spans_exercise::Getters;
 
 #[derive(Getters)]

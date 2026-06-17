@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 token-stream-macros = { path = "token-stream-macros" }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
