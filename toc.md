@@ -10,13 +10,13 @@
 
 - The proc-macro toolkit
   - Crate structure (create a proc-macro crate, wire it up)
-  - The re-export pattern (facade crate, e.g. serde + serde_derive)
   - What a proc macro returns (valid TokenStream)
   - A minimal derive macro
   - Token and TokenStream
   - proc-macro2
   - Parsing Rust code with syn
   - Generating code with quote
+  - The re-export pattern (facade crate, e.g. serde + serde_derive)
   - Testing with trybuild
 
 - Derive macros

@@ -1,6 +1,6 @@
 # Testing with `trybuild`
 
-In the [`proc-macro2`](./06_proc_macro2.md) section you wrote a unit test that called your
+In the [`proc-macro2`](./05_proc_macro2.md) section you wrote a unit test that called your
 code-generation function directly and asserted on the tokens it produced — no separate crate,
 no real `#[derive]`. That's the fastest way to check your _logic_, and you can do the same for
 the `FieldNames` macro:
@@ -160,7 +160,7 @@ compilation and expected error messages.
 
 ## Exercise
 
-Write `trybuild` tests for the `FieldNames` derive macro you built in the previous exercise. Add a
+Write `trybuild` tests for the `FieldNames` derive macro you built in the `quote` exercise. Add a
 passing case in `examples/` (a named struct) and a compile-fail case in `tests/fail/` (using the
 macro on an enum). Once the passing case compiles, run `cargo expand --example <name>` on it to see
 the `field_names()` method your macro generated.
