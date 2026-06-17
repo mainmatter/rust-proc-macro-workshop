@@ -77,6 +77,14 @@ wr
 `wr` will verify the solution to the current exercise.\
 Don't move on to the next section until you've solved the exercise for the current one.
 
+You can also check a specific exercise without advancing through the course: navigate into its
+folder and run `wr check`.
+
+```bash
+cd exercises/01_intro/00_welcome/
+wr check
+```
+
 > We recommend committing your solutions to Git as you progress through the course,
 > so you can easily track your progress and "restart" from a known point if needed.
 
