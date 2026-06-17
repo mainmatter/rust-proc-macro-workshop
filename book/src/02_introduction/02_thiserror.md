@@ -4,7 +4,7 @@ Let's look at a real-world derive macro: [`thiserror`](https://docs.rs/thiserror
 
 `thiserror` provides a `#[derive(Error)]` macro that generates implementations of
 `std::fmt::Display` and `std::error::Error` for your error types. Without it, you'd have to
-write those implementations by hand — repetitive boilerplate that adds no value.
+write those implementations by hand — repetitive boilerplate.
 
 ## Before `thiserror`
 
@@ -48,7 +48,7 @@ and `Error` implementations for you.
 
 ## Attributes
 
-Notice how `thiserror` uses **attributes** to customize the generated code:
+Notice how `thiserror` uses **helper attributes** to customize the generated code:
 
 - `#[error("...")]` controls the `Display` message for each variant.
 - [`#[from]`](https://docs.rs/thiserror/latest/thiserror/index.html) can be added to a variant field to automatically generate a `From` implementation.
@@ -85,7 +85,7 @@ impl std::fmt::Display for ApiError {
 impl std::error::Error for ApiError {}
 ```
 
-No magic — just the same code you would have written by hand.
+The same code you would have written by hand.
 
 ## Exercise
 
