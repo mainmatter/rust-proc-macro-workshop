@@ -58,8 +58,16 @@ Procedural macros are:
 | Needs a separate crate    | No          | Yes        |
 
 A good rule of thumb: start with `macro_rules!`. If you hit its limits — you need to parse
-Rust syntax, inspect types, or use attributes — switch to a procedural macro.
+Rust syntax, inspect types, or use attributes — switch to a procedural macro.[^decl-macros-2]
 
 ## Exercise
 
 Write a `hashmap!` macro using `macro_rules!` that creates a `HashMap` from key-value pairs.
+
+[^decl-macros-2]: Some of these limits are being lifted. The long-running
+["declarative macros 2.0"](https://github.com/rust-lang/rust/issues/39412) effort modernizes
+`macro_rules!`, and on top of it [RFC 3698, "Declarative `macro_rules!` derive
+macros"](https://github.com/rust-lang/rust/issues/143549) lets you write a `derive` in
+`macro_rules!` — inspecting a type's fields and generating an `impl` without a separate
+proc-macro crate. The aim is to cover the simple derive cases declaratively; the heavy cases
+will still want procedural macros.

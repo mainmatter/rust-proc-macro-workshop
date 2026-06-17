@@ -34,18 +34,20 @@
 /// separated by `=>` instead of single elements.
 // TODO: fill in the body of the `hashmap` macro
 macro_rules! hashmap {
-    // Base case: no arguments → empty HashMap
+    // Base case: no arguments → empty HashMap.
+    // TODO: expand to a new, empty HashMap (look at how `vec!`'s base case works above).
     () => {
-        ::std::collections::HashMap::new()
+        todo!()
     };
     // Match comma-separated key => value pairs.
     // TODO: fill in the pattern and the body.
     //   - The pattern should capture $key:expr => $value:expr pairs,
     //     separated by commas (with an optional trailing comma).
     //   - The body should create a HashMap, insert each pair, and return it.
-    ( $( $key:expr => $value:expr ),* $(,)? ) => {
-        todo!()
-    };
+    // The surrounding `{ ... }` block is provided for you: a macro arm expands to a
+    // single expression, so the statements (create, insert, return) must live inside a
+    // block. Write your code where the `todo!()` is.
+    ( $( $key:expr => $value:expr ),* $(,)? ) => {{ todo!() }};
 }
 
 #[cfg(test)]
