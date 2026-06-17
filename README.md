@@ -23,6 +23,7 @@ Follow the instructions there to get started.
   If not, update using `rustup update` (or another appropriate command depending on how you installed Rust on your system).
 - _(Optional)_ An IDE with Rust autocompletion support.
   We recommend one of the following:
+  - [Zed](https://zed.dev/);
   - [RustRover](https://www.jetbrains.com/rust/);
   - [Visual Studio Code](https://code.visualstudio.com) with the [`rust-analyzer`](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer) extension.
 
