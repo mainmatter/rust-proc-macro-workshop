@@ -1,14 +1,14 @@
 # Crate structure
 
-A procedural macro must live in its own crate, separate from the code that uses it. This isn't
-a convention — it's a hard requirement enforced by the compiler.
+A procedural macro must live in its own crate, separate from the code that uses it.
 
 ## Why a separate crate?
 
-Procedural macros run at **compile time**. They are compiled separately and loaded by the
-compiler while building the crate that uses the macro. This means the macro code and the
-code that uses it cannot be in the same crate — the macro needs to be fully compiled before the
-compiler can process the code that invokes it.
+Procedural macros run at **compile time**. The compiler doesn't just read your macro — it
+_runs_ it. To make that possible, a procedural macro must be compiled into an executable that
+the compiler can invoke while compiling any crate that uses the macro. That executable has to
+exist before those crates are built, so the macro needs its own compilation unit — a separate,
+distinct crate.
 
 ## Creating a proc-macro crate
 
@@ -34,8 +34,9 @@ When you set `proc-macro = true`, your crate automatically gets access to the
 [`proc_macro`](https://doc.rust-lang.org/proc_macro/) crate from the standard library.
 You don't need to add it to `[dependencies]` — it's provided by the compiler.
 
-This crate gives you the core type you'll work with: `TokenStream`. Every procedural macro
-is a function that takes a `TokenStream` as input and returns a `TokenStream` as output.
+This crate gives you the core type you'll work with:
+[`TokenStream`](https://doc.rust-lang.org/proc_macro/struct.TokenStream.html). Every procedural
+macro is a function that takes a `TokenStream` as input and returns a `TokenStream` as output.
 
 ```rust
 use proc_macro::TokenStream;
@@ -75,4 +76,4 @@ path dependency.
 
 Create a proc-macro crate from scratch and wire it up. You'll need to create the `Cargo.toml`
 (with `proc-macro = true`), write a derive macro that returns an empty token stream, and add
-it as a dependency. Then uncomment the provided code to verify everything compiles.
+it as a dependency so the provided code compiles.
