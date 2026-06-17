@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-container-attr-exercise-macros = { path = "macros" }
+container-attr-exercise-macros = { path = "container-attr-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

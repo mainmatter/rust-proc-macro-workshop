@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-state-machine-exercise-macros = { path = "macros" }
+state-machine-exercise-macros = { path = "state-machine-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

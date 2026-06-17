@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-name-clashes-exercise-macros = { path = "macros" }
+name-clashes-exercise-macros = { path = "name-clashes-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

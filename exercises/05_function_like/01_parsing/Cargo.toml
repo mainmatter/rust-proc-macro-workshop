@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-parse-input-exercise-macros = { path = "macros" }
+parse-input-exercise-macros = { path = "parse-input-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

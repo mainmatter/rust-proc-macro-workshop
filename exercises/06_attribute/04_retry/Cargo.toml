@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-retry-exercise-macros = { path = "macros" }
+retry-exercise-macros = { path = "retry-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

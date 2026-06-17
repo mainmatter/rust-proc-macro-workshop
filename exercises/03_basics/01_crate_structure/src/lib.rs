@@ -1,14 +1,16 @@
 // TODO:
-//   1. Create a proc-macro crate in the `macros/` subdirectory (next to this crate's
-//      `Cargo.toml`). You'll need:
-//      - `macros/Cargo.toml` — with `proc-macro = true` under `[lib]`.
-//      - `macros/src/lib.rs` — define a derive macro named `Empty`
+//   1. Create a proc-macro crate in the `crate-structure-exercise-macros/` subdirectory
+//      (next to this crate's `Cargo.toml`). Give the macro crate a unique package name
+//      rather than just `macros` — sharing one name across crates forces awkward
+//      package renaming later. You'll need:
+//      - `crate-structure-exercise-macros/Cargo.toml` — with `proc-macro = true` under `[lib]`.
+//      - `crate-structure-exercise-macros/src/lib.rs` — define a derive macro named `Empty`
 //        that returns an empty `TokenStream`.
 //   2. Add it as a path dependency in this crate's `Cargo.toml`:
-//        macros = { path = "macros" }
+//        crate-structure-exercise-macros = { path = "crate-structure-exercise-macros" }
 //   3. Uncomment the lines below.
 
-// use macros::Empty;
+// use crate_structure_exercise_macros::Empty;
 //
 // #[derive(Empty)]
 // struct Foo;
