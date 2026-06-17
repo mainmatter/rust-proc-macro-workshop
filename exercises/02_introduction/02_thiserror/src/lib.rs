@@ -1,15 +1,10 @@
 /// Use `thiserror` to derive `Error` and `Display` for this enum.
 ///
-/// Requirements:
-/// - `NotFound` should display as "resource not found"
-/// - `InvalidInput` should display as "invalid input: {msg}" where `msg` is the field value
-/// - `Internal` should display as "internal error" and its `source()` should return the inner error
-/// - An `std::io::Error` should be convertible into `AppError::Internal` via `From`
-///
-/// Hint: you need `#[derive(...)]` and `#[error("...")]` attributes on each variant.
-/// Check out the `thiserror` documentation for `#[from]` and `#[source]`:
+/// The tests below spell out exactly what's expected of each variant — read them to
+/// figure out the `Display` messages, the error source, and the `From` conversion you need.
+/// The `thiserror` documentation covers the helper attributes that make this possible:
 /// https://docs.rs/thiserror
-// TODO: add the right derive and attributes on the enum and its variants
+// TODO: add the right derive and helper attributes on the enum and its variants
 #[derive(Debug)]
 pub enum AppError {
     NotFound,
@@ -20,6 +15,8 @@ pub enum AppError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
+    use std::assert_matches;
     use std::error::Error;
 
     #[test]
@@ -54,6 +51,6 @@ mod tests {
     fn from_io_error() {
         let io_err = std::io::Error::new(std::io::ErrorKind::Other, "oops");
         let err: AppError = io_err.into();
-        assert!(matches!(err, AppError::Internal(_)));
+        assert_matches!(err, AppError::Internal(_));
     }
 }
