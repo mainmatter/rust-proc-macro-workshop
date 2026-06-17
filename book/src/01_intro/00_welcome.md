@@ -100,4 +100,9 @@ Enjoy the course!
 
 ## Author
 
-Authored by Guillaume Desmottes for [Mainmatter](https://mainmatter.com/rust-consulting/).
+Authored by [Guillaume Desmottes](mailto:guillaume.desmottes@mainmatter.com) for
+[Mainmatter](https://mainmatter.com/rust-consulting/).
+
+Guillaume is part of the Mainmatter Rust team. He maintains various crates, such as
+[`system-deps`](https://crates.io/crates/system-deps), and is the creator of
+[Karapulse](https://gitlab.freedesktop.org/gdesmott/karapulse), a Rust karaoke application.
