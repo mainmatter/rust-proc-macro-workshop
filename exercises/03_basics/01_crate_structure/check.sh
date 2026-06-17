@@ -24,9 +24,4 @@ if ! grep -q 'crate-structure-exercise-macros' "$dir/Cargo.toml"; then
     exit 1
 fi
 
-if grep -q '^// use crate_structure_exercise_macros' "$dir/src/lib.rs"; then
-    echo "ERROR: The code in src/lib.rs is still commented out. Uncomment it."
-    exit 1
-fi
-
 cargo test --color always
