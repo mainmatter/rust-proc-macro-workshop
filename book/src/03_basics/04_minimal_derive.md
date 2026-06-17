@@ -12,8 +12,8 @@ and try to extract the struct name manually:
 ```rust
 use proc_macro::TokenStream;
 
-#[proc_macro_derive(TypeName)]
-pub fn type_name(input: TokenStream) -> TokenStream {
+#[proc_macro_derive(Greet)]
+pub fn greet(input: TokenStream) -> TokenStream {
     let input = input.to_string();
     // Crude: find the word after "struct"
     let name = input
@@ -23,7 +23,7 @@ pub fn type_name(input: TokenStream) -> TokenStream {
         .expect("expected a struct");
 
     format!(
-        "impl {name} {{ pub fn type_name() -> &'static str {{ \"{name}\" }} }}"
+        "impl {name} {{ pub fn greet() -> &'static str {{ \"Hello from {name}!\" }} }}"
     )
     .parse()
     .unwrap()
@@ -42,13 +42,13 @@ The [`syn`](https://docs.rs/syn) crate provides a full Rust parser. It can parse
 use proc_macro::TokenStream;
 use syn::{parse_macro_input, DeriveInput};
 
-#[proc_macro_derive(TypeName)]
-pub fn type_name(input: TokenStream) -> TokenStream {
+#[proc_macro_derive(Greet)]
+pub fn greet(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
 
     format!(
-        "impl {name} {{ pub fn type_name() -> &'static str {{ \"{name}\" }} }}"
+        "impl {name} {{ pub fn greet() -> &'static str {{ \"Hello from {name}!\" }} }}"
     )
     .parse()
     .unwrap()
@@ -67,6 +67,12 @@ represents the input to a derive macro. It gives you:
 For now, we only need `ident`. We'll use the other fields in later chapters.
 
 ## `parse_macro_input!`
+
+Let's look again at the line that does the parsing:
+
+```rust
+let input = parse_macro_input!(input as DeriveInput);
+```
 
 The [`parse_macro_input!`](https://docs.rs/syn/latest/syn/macro.parse_macro_input.html) macro
 from `syn` parses a `TokenStream` into any type that implements
