@@ -96,7 +96,29 @@ nested `TokenStream`. For a struct like `struct Pair { x: i32 }`, the top level 
 _inside_ that group.
 
 To reach them, call [`Group::stream()`](https://doc.rust-lang.org/proc_macro/struct.Group.html#method.stream)
-to get the inner stream and recurse.
+to get the inner stream and recurse. Here we extend the `Inspect` example above to walk the
+whole tree, printing nested tokens with indentation:
+
+```rust
+use proc_macro::{TokenStream, TokenTree};
+
+fn print_tree(stream: TokenStream, depth: usize) {
+    let indent = "  ".repeat(depth);
+    for tree in stream {
+        match tree {
+            TokenTree::Group(group) => {
+                eprintln!("{indent}Group {:?}", group.delimiter());
+                // `group.stream()` is the nested TokenStream — recurse into it.
+                print_tree(group.stream(), depth + 1);
+            }
+            other => eprintln!("{indent}{other:?}"),
+        }
+    }
+}
+```
+
+Without the `Group` arm, `print_tree` would only ever see the top-level tokens; calling
+`group.stream()` is what lets it descend into `(...)`, `[...]`, and `{...}`.
 
 ## Building a `TokenStream`
 
