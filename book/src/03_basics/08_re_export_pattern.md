@@ -1,8 +1,7 @@
 # The re-export pattern
 
-In the previous exercise, the code that uses a derive macro had to depend directly on the
-proc-macro crate. This works, but there's a problem: proc-macro crates are limited in what
-they can export.
+So far, the code that uses a derive macro has depended directly on the proc-macro crate. This
+works, but there's a problem: proc-macro crates are limited in what they can export.
 
 A `proc-macro = true` crate can **only** export procedural macros. It cannot export structs,
 traits, functions, or any other items. If your macro generates code that references a trait

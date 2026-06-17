@@ -22,7 +22,7 @@ stream of these tokens.
 
 Procedural macros operate on exactly that stream — they receive tokens as input and return
 tokens as output. For now, "the words and symbols your code is made of" is a good enough mental
-model; we'll make it precise in [Token and TokenStream](../03_basics/05_token_and_tokenstream.md).
+model; we'll make it precise in [Token and TokenStream](../03_basics/04_token_and_tokenstream.md).
 
 ## Derive macros
 

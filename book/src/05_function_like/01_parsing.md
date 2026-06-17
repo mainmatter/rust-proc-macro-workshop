@@ -55,7 +55,7 @@ Two new pieces compared to a derive macro:
   accepts trailing commas everywhere else. (`Token![,]` is `syn`'s way of naming the `,` token
   type; there's a `Token![...]` for every bit of Rust punctuation and every keyword.)
 - **`#( ... )*` over a runtime iterator.** You met `quote!`'s repetition in
-  [chapter 3](../03_basics/08_quote.md#repetition-with---) when expanding struct fields. It works on anything iterable, including the `rest` iterator here:
+  [chapter 3](../03_basics/07_quote.md#repetition-with---) when expanding struct fields. It works on anything iterable, including the `rest` iterator here:
   `quote!` advances it once per repetition and splices each expression in turn.
 
 That's the whole macro. Note that `min!` _generates_ a chain of `min` calls; it doesn't compute
