@@ -46,8 +46,9 @@ worth it for a handful of types.
 
 ## The cost of proc macros
 
-- **Compile time**: proc macros add a compilation step. [`syn`](https://docs.rs/syn) in particular is a large
-  dependency.
+- **Compile time**: a proc macro must be compiled as a standalone binary that the compiler runs
+  during your build, which adds linking and code-generation overhead you don't pay for a "normal"
+  library dependency.
 - **Debuggability**: generated code is harder to debug than hand-written code.
 - **Error messages**: getting good error messages from macros takes significant effort.
 - **Maintenance**: macro code is harder to read and maintain than regular Rust code.
