@@ -19,6 +19,8 @@ the input with `syn`, generate code with `quote`, and return it as a token strea
 
 ## Exercise
 
-A quick warm-up before diving in: use `thiserror`'s derive macro to implement `Display` for an
-enum. This is a reminder of what derive macros look like from the user's perspective — you'll
-be building your own from the next section onwards.
+A quick warm-up before diving in: use [`derive_more`](https://docs.rs/derive_more)'s `Display`
+derive to implement `Display` for an enum. `derive_more` brings derive macros to many standard
+library traits — `Display`, `From`, `Add`, `Deref`, and more — saving you the hand-written
+boilerplate. It's a good reminder of what derive macros look like from the user's perspective —
+you'll be building your own from the next section onwards.

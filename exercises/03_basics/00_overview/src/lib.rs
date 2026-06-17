@@ -1,11 +1,13 @@
-/// Use `thiserror` to derive `Display` for this enum.
+/// Use `derive_more` to derive `Display` for this enum.
 /// Each variant should display as specified in the tests.
 ///
 /// This is a quick warm-up to remind you what derive macros look like
 /// from the user's perspective — you'll be building your own from
 /// the next section onwards.
 
-// TODO: Derive `thiserror::Error` and add `#[error("...")]` attributes.
+// TODO: Derive `derive_more::Display` and add a `#[display("...")]` attribute to
+//       each variant. The format string can reference the variant's fields by name,
+//       e.g. `{radius}` (see the tests for the exact wording each variant should produce).
 #[derive(Debug)]
 pub enum Shape {
     Circle { radius: f64 },
