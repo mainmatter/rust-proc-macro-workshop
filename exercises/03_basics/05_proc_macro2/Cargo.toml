@@ -8,4 +8,6 @@ proc-macro = true
 
 [dependencies]
 proc-macro2 = { workspace = true }
-syn = { workspace = true }
+# `extra-traits` provides `Debug` for `syn` types, needed by the `assert_matches!`
+# test on `syn::Item` below.
+syn = { workspace = true, features = ["extra-traits"] }
