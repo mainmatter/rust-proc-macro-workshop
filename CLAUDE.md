@@ -117,3 +117,19 @@ use inline `#[cfg(test)]` tests instead.
 ## Solutions
 
 Solutions live on a separate `solutions` branch as a single commit on top of `main`. The `main` branch contains exercises with `todo!()` placeholders.
+
+### Keeping `solutions` up to date
+
+The `solutions` commit is stacked on top of `main`, so any change to an exercise on `main` must be
+reflected in the solution. After modifying an exercise, you MUST:
+
+1. **Rebase `solutions` onto the new commit** so it sits on top of the latest `main`.
+   - With `jj`: `jj rebase -b solutions -d main` (or, when the solution is already stacked on the
+     in-progress change, jj rebases it automatically — verify with `jj log`).
+   - With `git`: check out `solutions` and `git rebase main`.
+2. **Resolve any conflicts**, keeping the solution's filled-in implementation (the real code that
+   replaces the exercise's `todo!()`) while picking up the new exercise scaffolding (tests,
+   derives, `.wr.toml`/`check.sh`, comments, etc.).
+3. **Ensure `wr check` passes for the updated solution.** Check out the `solutions` commit
+   (`jj edit solutions`) and run `wr check` from the affected exercise's directory. The solution
+   must be green before you consider the exercise change complete.
