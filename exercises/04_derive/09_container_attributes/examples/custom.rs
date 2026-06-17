@@ -1,4 +1,5 @@
 use container_attr_exercise::Repeat;
+use pretty_assertions::assert_eq;
 
 #[derive(Repeat)]
 #[repeat(times = 3)]

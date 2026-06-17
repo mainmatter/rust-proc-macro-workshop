@@ -1,4 +1,5 @@
 use compile_error_exercise::Getters;
+use pretty_assertions::assert_eq;
 
 #[derive(Getters)]
 struct User {

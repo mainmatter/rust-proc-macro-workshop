@@ -1,4 +1,5 @@
 use builder_exercise::Builder;
+use pretty_assertions::assert_eq;
 
 #[derive(Builder, Debug)]
 struct Command {

@@ -6,3 +6,6 @@ edition = "2024"
 # TODO: Add the `re-export-exercise-macros` crate (in the `re-export-exercise-macros/`
 #       subdirectory) as a dependency.
 [dependencies]
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

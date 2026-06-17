@@ -1,4 +1,5 @@
 use darling_exercise::Model;
+use pretty_assertions::assert_eq;
 
 #[derive(Model)]
 #[model(table = "users")]

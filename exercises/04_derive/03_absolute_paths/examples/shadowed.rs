@@ -1,4 +1,5 @@
 use abs_paths_exercise::TypeName;
+use pretty_assertions::assert_eq;
 
 // A hostile (or just unlucky) user shadows `String` in their own module.
 // The generated code must still compile and behave correctly, which means it

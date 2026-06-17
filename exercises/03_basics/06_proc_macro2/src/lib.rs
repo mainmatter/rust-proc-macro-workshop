@@ -28,6 +28,7 @@ fn type_name_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::assert_matches;
     use syn::parse_str;
 
     /// This test demonstrates the key benefit of `proc-macro2`: you can unit-test
@@ -60,8 +61,9 @@ mod tests {
         let output = type_name_impl(&input);
         let item: syn::Item = syn::parse2(output.clone())
             .unwrap_or_else(|e| panic!("generated code is not a valid Rust item: {e}\n{output}"));
-        assert!(
-            matches!(item, syn::Item::Impl(_)),
+        assert_matches!(
+            item,
+            syn::Item::Impl(_),
             "expected an impl block, got: {output}"
         );
     }

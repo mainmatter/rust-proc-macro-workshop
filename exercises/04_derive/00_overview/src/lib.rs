@@ -28,6 +28,7 @@ pub struct User {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
 
     #[test]
     fn serializes_in_camel_case() {

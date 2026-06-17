@@ -1,4 +1,5 @@
 use field_attr_exercise::Renamed;
+use pretty_assertions::assert_eq;
 
 #[derive(Renamed)]
 struct Row {

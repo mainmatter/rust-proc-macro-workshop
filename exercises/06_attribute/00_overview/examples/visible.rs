@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 // `secret` is declared *without* `pub` inside a private module. The only way the
 // call in `main` can compile is if `#[make_public]` rewrote it to `pub fn`.
 mod inner {

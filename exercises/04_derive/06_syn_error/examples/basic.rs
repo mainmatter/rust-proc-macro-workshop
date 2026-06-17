@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use syn_error_exercise::Getters;
 
 #[derive(Getters)]

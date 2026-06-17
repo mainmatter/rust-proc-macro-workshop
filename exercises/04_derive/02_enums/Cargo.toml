@@ -7,4 +7,5 @@ edition = "2024"
 enums-exercise-macros = { path = "enums-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

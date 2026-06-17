@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use state_machine_exercise::StateMachine;
 
 // A classic three-state cycle: Red -> Green -> Yellow -> Red.

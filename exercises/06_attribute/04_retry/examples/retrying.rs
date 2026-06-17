@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use retry_exercise::retry;
 use std::sync::atomic::{AtomicU32, Ordering};
 

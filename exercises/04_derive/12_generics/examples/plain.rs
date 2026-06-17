@@ -1,4 +1,5 @@
 use generics_exercise::Empty;
+use pretty_assertions::assert_eq;
 
 #[derive(Empty)]
 struct Plain {

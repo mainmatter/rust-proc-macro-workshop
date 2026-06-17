@@ -22,6 +22,7 @@ fn greeting() -> &'static str {
 #[cfg(test)]
 mod tests {
     use crate::greeting;
+    use pretty_assertions::assert_eq;
 
     #[test]
     fn starting_block() {

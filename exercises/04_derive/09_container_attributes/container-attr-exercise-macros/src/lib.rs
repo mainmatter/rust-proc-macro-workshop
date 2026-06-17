@@ -64,6 +64,7 @@ fn extract_times(input: &DeriveInput) -> syn::Result<usize> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
     use syn::parse_str;
 
     #[test]

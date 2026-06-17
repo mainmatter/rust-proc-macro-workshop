@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 quote-exercise-macros = { path = "quote-exercise-macros" }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

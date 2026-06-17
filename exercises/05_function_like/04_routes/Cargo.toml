@@ -7,4 +7,5 @@ edition = "2024"
 routes-exercise-macros = { path = "routes-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

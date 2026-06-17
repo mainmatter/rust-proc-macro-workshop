@@ -1,4 +1,5 @@
 use parse_input_exercise::avg;
+use pretty_assertions::assert_eq;
 
 fn main() {
     // Plain literals.

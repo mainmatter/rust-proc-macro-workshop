@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 proc-macro-returns-macros = { path = "proc-macro-returns-macros" }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

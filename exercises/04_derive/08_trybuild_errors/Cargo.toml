@@ -7,4 +7,5 @@ edition = "2024"
 trybuild-errors-exercise-macros = { path = "trybuild-errors-exercise-macros" }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 trybuild = { workspace = true }

@@ -1,3 +1,4 @@
+use pretty_assertions::assert_eq;
 use routes_exercise::routes;
 
 fn index() -> String {
