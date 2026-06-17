@@ -3,13 +3,15 @@
 ///
 /// Then, based on what you see in the expanded output, write a manual
 /// `Clone` implementation for `Hsl` that does the same thing.
-#[derive(Clone)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Rgb {
     pub r: u8,
     pub g: u8,
     pub b: u8,
 }
 
+// Note: no `Eq` here — `f64` is `PartialEq` but not `Eq`.
+#[derive(Debug, PartialEq)]
 pub struct Hsl {
     pub h: f64,
     pub s: f64,
@@ -35,10 +37,7 @@ mod tests {
             g: 128,
             b: 0,
         };
-        let c2 = c.clone();
-        assert_eq!(c.r, c2.r);
-        assert_eq!(c.g, c2.g);
-        assert_eq!(c.b, c2.b);
+        assert_eq!(c.clone(), c);
     }
 
     #[test]
@@ -48,9 +47,6 @@ mod tests {
             s: 0.8,
             l: 0.3,
         };
-        let c2 = c.clone();
-        assert_eq!(c.h, c2.h);
-        assert_eq!(c.s, c2.s);
-        assert_eq!(c.l, c2.l);
+        assert_eq!(c.clone(), c);
     }
 }

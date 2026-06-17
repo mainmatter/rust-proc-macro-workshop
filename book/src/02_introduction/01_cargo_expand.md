@@ -9,17 +9,32 @@ debugging the macros you write yourself.
 
 ## Installation
 
+The fastest way is via [`cargo-binstall`](https://github.com/cargo-bins/cargo-binstall), which
+downloads a prebuilt binary instead of compiling from source:
+
 ```bash
-# First, install cargo-binstall if you don't have it already.
-# It downloads prebuilt binaries instead of compiling from source.
+# Install cargo-binstall first if you don't have it already.
 cargo install cargo-binstall
 
-# Then use it to install cargo-expand (much faster than compiling):
+# Then use it to fetch a prebuilt cargo-expand.
 cargo binstall cargo-expand
+```
 
-# Alternatively, compile cargo-expand from source directly:
+Alternatively, compile `cargo-expand` from source directly. This is slower, but needs no extra
+tooling:
+
+```bash
 cargo install cargo-expand
 ```
+
+## Editor integration
+
+You don't strictly need the command-line tool: most editors backed by
+[rust-analyzer](https://rust-analyzer.github.io/) can expand macros for you. In
+[Zed](https://zed.dev/), place your cursor over a macro invocation and run **`editor: expand macro recursively`** from the command palette. VS Code (with the rust-analyzer extension) offers the same
+under **`rust-analyzer: Expand macro recursively`**, and JetBrains IDEs have an equivalent
+**Expand macro** action. These are handy for a quick look, while `cargo expand` is better when you
+want the whole crate or to pipe the output elsewhere.
 
 ## Usage
 
