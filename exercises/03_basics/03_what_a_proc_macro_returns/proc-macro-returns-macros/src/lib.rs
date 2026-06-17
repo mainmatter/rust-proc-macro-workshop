@@ -1,21 +1,11 @@
 use proc_macro::TokenStream;
 
-/// A derive macro that generates a `type_name()` method returning the type's name.
+/// A derive macro that generates a `type_name()` method on the annotated type,
+/// returning the type's name as a `&'static str`.
 ///
-/// For this exercise, it's okay to hardcode the struct name "Greeting" in the
-/// generated code. We'll learn how to extract it from the input in the next exercise.
-///
-/// The generated code should look like:
-///
-/// ```ignore
-/// impl Greeting {
-///     pub fn type_name() -> &'static str {
-///         "Greeting"
-///     }
-/// }
-/// ```
-///
-/// Hint: You can parse a string into a `TokenStream` using `.parse().unwrap()`.
+/// For this exercise it's fine to hard-code the type name in the generated `impl`
+/// — you'll learn how to read it from the input in the next exercise. The `Hello`
+/// example in the book section shows the shape of the code you need to return.
 #[proc_macro_derive(TypeName)]
 pub fn type_name(_input: TokenStream) -> TokenStream {
     todo!()
