@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-attr-graceful-exercise-macros = { path = "macros" }
+attr-graceful-exercise-macros = { path = "attr-graceful-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

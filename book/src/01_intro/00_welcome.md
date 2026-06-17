@@ -57,10 +57,11 @@ git checkout -b my-solutions
 
 All exercises are located in the `exercises` folder.
 Each exercise is a Rust package, and most are split into two crates: a thin consumer crate and a
-`macros` sub-crate that holds the procedural macro you'll be working on.
+procedural-macro sub-crate (named after the exercise, e.g. `struct-fields-exercise-macros`) that
+holds the macro you'll be working on.
 The instructions on what to do, along with a test suite to automatically verify your solution, live
-next to the code you need to edit: usually in `macros/src/lib.rs`, or in `src/lib.rs` for the
-simpler single-crate exercises.
+next to the code you need to edit: usually in the macro sub-crate's `src/lib.rs`, or in `src/lib.rs`
+for the simpler single-crate exercises.
 
 ### `wr`, the workshop runner
 

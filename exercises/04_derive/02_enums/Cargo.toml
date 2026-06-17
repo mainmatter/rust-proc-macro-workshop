@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-enums-exercise-macros = { path = "macros" }
+enums-exercise-macros = { path = "enums-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

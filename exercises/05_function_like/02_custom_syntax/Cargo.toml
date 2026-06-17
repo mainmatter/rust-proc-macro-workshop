@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-custom-syntax-exercise-macros = { path = "macros" }
+custom-syntax-exercise-macros = { path = "custom-syntax-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

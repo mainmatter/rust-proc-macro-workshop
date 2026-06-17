@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-compile-error-exercise-macros = { path = "macros" }
+compile-error-exercise-macros = { path = "compile-error-exercise-macros" }
 
 [dev-dependencies]
 trybuild = { workspace = true }

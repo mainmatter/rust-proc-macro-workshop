@@ -76,9 +76,9 @@ dependencies, it's because `serde` re-exports it for you.
 
 ## Exercise
 
-The `macros/` subdirectory already contains a working `Describe` derive macro that implements
-a `SelfDescribe` trait. Your job is to wire up the facade pattern:
+The `re-export-exercise-macros/` subdirectory already contains a working `Describe` derive macro
+that implements a `SelfDescribe` trait. Your job is to wire up the facade pattern:
 
-1. Add the `macros` crate as a path dependency in `Cargo.toml`.
+1. Add the `re-export-exercise-macros` crate as a path dependency in `Cargo.toml`.
 2. Re-export the `Describe` derive macro with `pub use` in `src/lib.rs`, so that downstream
    code can import both the trait and the macro from a single crate.
