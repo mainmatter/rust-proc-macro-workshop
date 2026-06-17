@@ -31,7 +31,7 @@ struct Config {
 
 A function can't look at a struct definition and generate trait implementations for it.
 That requires inspecting the structure of the code itself — its fields, their types, their
-attributes — and producing new code based on what it finds.
+attributes — and producing new code based on what it finds.[^reflection]
 
 ### New syntax
 
@@ -57,3 +57,9 @@ Use standard library macros ([`format!`](https://doc.rust-lang.org/std/macro.for
 that would be impossible with regular functions: formatting with a variable number of arguments,
 reading environment variables at compile time, embedding file contents, and concatenating
 string literals.
+
+[^reflection]: This boundary may soften in the future. The Rust project is working on
+[compile-time reflection](https://rust-lang.github.io/rust-project-goals/2026/reflection-and-comptime.html), a
+`const fn`-based system that would let ordinary functions inspect a type's fields at compile
+time — taking over part of what derive macros do today, though derives are expected to stay
+around for performance-critical cases.
