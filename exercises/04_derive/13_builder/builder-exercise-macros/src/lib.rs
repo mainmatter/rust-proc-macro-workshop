@@ -113,19 +113,28 @@ fn builder_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
 
 /// If `ty` is `Option<U>`, returns `Some(U)`; otherwise `None`.
 fn option_inner(ty: &Type) -> Option<&Type> {
+    // We only care about path types like `Option<U>` or `std::option::Option<U>`.
+    // Anything else (references, tuples, etc.) is never an `Option`.
     let Type::Path(type_path) = ty else {
         return None;
     };
+    // A qualified self (`<T as Trait>::Option`) is not the plain `Option` we want.
     if type_path.qself.is_some() {
         return None;
     }
+    // Match on the *last* segment so both `Option<U>` and `std::option::Option<U>`
+    // are recognised — the leading `std::option::` segments are ignored.
     let segment = type_path.path.segments.last()?;
     if segment.ident != "Option" {
         return None;
     }
+    // The segment must carry angle-bracketed arguments (`<...>`); a bare `Option`
+    // with no type argument doesn't qualify.
     let PathArguments::AngleBracketed(args) = &segment.arguments else {
         return None;
     };
+    // Take the first generic argument and keep it only if it's a type (`U`),
+    // ignoring lifetimes or const generics.
     match args.args.first()? {
         GenericArgument::Type(inner) => Some(inner),
         _ => None,
