@@ -84,31 +84,16 @@ fn builder_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
         build_fields.push(build_field);
     }
 
-    Ok(quote! {
-        pub struct #builder_name {
-            #(#builder_fields)*
-        }
-
-        impl #name {
-            pub fn builder() -> #builder_name {
-                #builder_name {
-                    #(#builder_init)*
-                }
-            }
-        }
-
-        impl #builder_name {
-            #(#setters)*
-
-            pub fn build(
-                &mut self,
-            ) -> ::std::result::Result<#name, ::std::boxed::Box<dyn ::std::error::Error>> {
-                ::std::result::Result::Ok(#name {
-                    #(#build_fields)*
-                })
-            }
-        }
-    })
+    // TODO: assemble and return the generated code, splicing the per-field pieces
+    //   collected above with the `#(...)*` repetition syntax. You need:
+    //   - a `pub struct #builder_name { ... }` holding the builder fields;
+    //   - an `impl #name` with a `builder()` constructor that returns an all-unset
+    //     builder;
+    //   - an `impl #builder_name` carrying the setters and a fallible
+    //     `build(&mut self) -> Result<#name, Box<dyn Error>>` that constructs
+    //     `#name` from the per-field `build` expressions.
+    //   Use absolute paths throughout.
+    Ok(quote! {})
 }
 
 /// If `ty` is `Option<U>`, returns `Some(U)`; otherwise `None`.
