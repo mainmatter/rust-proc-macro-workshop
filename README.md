@@ -13,7 +13,7 @@ This workshop is designed for people who have basic familiarity with Rust as a l
 
 ## Getting started
 
-Open [the companion book for this course](https://rust-exercises.com/proc-macros/) in your browser.
+Open [the companion book for this course](https://rust-exercises.com/proc-macro/) in your browser.
 Follow the instructions there to get started.
 
 ## Requirements
