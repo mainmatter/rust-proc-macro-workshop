@@ -10,8 +10,7 @@ This is a Mainmatter workshop teaching Rust procedural macros. It follows the sa
 
 - `exercises/` — Workshop exercises, organized as `[module]/[exercise]/` (e.g. `exercises/01_derive/02_fields/`). Each exercise is an individual Cargo crate and a workspace member.
 - `book/` — mdbook source. Each chapter in `book/src/` corresponds to an exercise module.
-- `helpers/` — Shared test utilities used across exercises (workspace member).
-- `Cargo.toml` — Workspace root with `members = ["exercises/*/*", "helpers"]`.
+- `Cargo.toml` — Workspace root with `members = ["exercises/*/*"]`.
 - `.wr.toml` — Configuration for the `wr` workshop runner tool.
 - `dprint.json` — Formatter config for markdown and TOML files.
 

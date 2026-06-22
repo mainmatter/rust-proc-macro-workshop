@@ -1,7 +1,6 @@
 [workspace]
 members = [
   "exercises/*/*",
-  "helpers",
 ]
 resolver = "2"
 
@@ -11,7 +10,6 @@ edition = "2024"
 [workspace.dependencies]
 darling = "0.20"
 derive_more = { version = "2", features = ["display"] }
-helpers = { path = "helpers" }
 pretty_assertions = "1"
 proc-macro2 = "1"
 quote = "1"
