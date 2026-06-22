@@ -21,6 +21,7 @@
             mdbook
             dprint
             cargo-watch
+            cargo-expand
           ];
         };
       });
