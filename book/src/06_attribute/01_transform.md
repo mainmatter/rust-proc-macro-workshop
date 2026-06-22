@@ -65,6 +65,19 @@ The key moves:
 - **Put it back.** [`func.block`](https://docs.rs/syn/latest/syn/struct.ItemFn.html#structfield.block)
   wants a `Box<syn::Block>`, then `quote!(#func)` re-emits the whole function.
 
+> **`parse_quote!` vs `quote!`.** Both expand the same interpolating syntax, but they return
+> different things. `quote!` produces a [`TokenStream`](https://docs.rs/proc-macro2/latest/proc_macro2/struct.TokenStream.html) —
+> a flat sequence of tokens with no guarantee they form anything valid. `parse_quote!` expands
+> those tokens _and parses them_ into a concrete `syn` type inferred from the context — here, the
+> `let new_body: syn::Block` annotation makes it produce a [`syn::Block`](https://docs.rs/syn/latest/syn/struct.Block.html),
+> exactly what `func.block` needs. So `parse_quote!` is essentially `quote!` followed by
+> [`syn::parse2`](https://docs.rs/syn/latest/syn/fn.parse2.html). Reach for `quote!` when you're
+> building the macro's final `TokenStream` output (like `quote!(#func)` above), and for
+> `parse_quote!` when you need an intermediate AST node to splice into an existing structure.
+> One caveat: `parse_quote!` panics if the tokens don't parse, which is fine for hardcoded snippets
+> like this one but not for tokens built from untrusted user input — there, use `syn::parse2` so you
+> can return a proper compile error instead.
+
 > **A note on `return`.** Because the original body becomes a block _expression_ — as in `#[timed]`
 > above — an early `return` inside it returns from the whole function and skips the wrapper's
 > trailing code. For timing that's
