@@ -29,6 +29,7 @@ use syn::Ident;
 
 let name = Ident::new("Foo", proc_macro2::Span::call_site());
 let tokens = quote! {
+    #[automatically_derived]
     impl #name {
         pub fn type_name() -> &'static str {
             stringify!(#name)
@@ -45,12 +46,21 @@ string literals yourself.
 This generates:
 
 ```rust
+#[automatically_derived]
 impl Foo {
     pub fn type_name() -> &'static str {
         stringify!(Foo) // expands to "Foo"
     }
 }
 ```
+
+### `#[automatically_derived]`
+
+Every `impl` block your derive macro emits should carry `#[automatically_derived]`. It tells
+the Rust toolchain that the implementation was generated, not hand-written, so Clippy and
+other tools suppress lints inside it — the user can't edit generated code, so warning them
+about it would be noise. The standard library's own derive macros (`Clone`, `Debug`,
+`PartialEq`, …) all emit it: make it a reflex.
 
 Any type that implements the [`ToTokens`](https://docs.rs/quote/latest/quote/trait.ToTokens.html)
 trait can be interpolated. `syn` types like `Ident`, `Type`, and `Path` all implement it, so
