@@ -45,18 +45,19 @@ use syn::{parse_macro_input, DeriveInput, Data, Fields};
 pub fn field_count(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
 
-    // Match on `data` to get the struct body, then on `fields` to
-    // handle the three possible field layouts.
-    let count = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            // struct Foo { x: i32, y: i32 }
-            Fields::Named(fields) => fields.named.len(),
-            // struct Foo(i32, i32)
-            Fields::Unnamed(fields) => fields.unnamed.len(),
-            // struct Foo;
-            Fields::Unit => 0,
-        },
-        _ => panic!("FieldCount only supports structs"),
+    // Get the struct body — panic if applied to an enum or union.
+    let Data::Struct(data) = &input.data else {
+        panic!("FieldCount only supports structs");
+    };
+
+    // Match on `fields` to handle the three possible field layouts.
+    let count = match &data.fields {
+        // struct Foo { x: i32, y: i32 }
+        Fields::Named(fields) => fields.named.len(),
+        // struct Foo(i32, i32)
+        Fields::Unnamed(fields) => fields.unnamed.len(),
+        // struct Foo;
+        Fields::Unit => 0,
     };
 
     let name = &input.ident;

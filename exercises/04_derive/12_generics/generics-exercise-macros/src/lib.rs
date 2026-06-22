@@ -21,22 +21,18 @@ pub fn empty(input: TokenStream) -> TokenStream {
 fn empty_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => {
-                return Err(syn::Error::new_spanned(
-                    input,
-                    "Empty only supports structs with named fields",
-                ));
-            }
-        },
-        _ => {
-            return Err(syn::Error::new_spanned(
-                input,
-                "Empty only supports structs",
-            ));
-        }
+    let Data::Struct(data) = &input.data else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Empty only supports structs",
+        ));
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Empty only supports structs with named fields",
+        ));
     };
 
     // Start from the type's own generics.
@@ -50,7 +46,7 @@ fn empty_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
 
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
 
-    let inits = fields.iter().map(|f| {
+    let inits = fields.named.iter().map(|f| {
         let ident = f.ident.as_ref().unwrap();
         quote! { #ident: ::core::default::Default::default() }
     });

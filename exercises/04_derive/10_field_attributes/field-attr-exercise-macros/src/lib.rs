@@ -19,25 +19,22 @@ pub fn renamed(input: TokenStream) -> TokenStream {
 fn renamed_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => {
-                return Err(syn::Error::new_spanned(
-                    input,
-                    "Renamed can only be derived for structs with named fields",
-                ));
-            }
-        },
-        _ => {
-            return Err(syn::Error::new_spanned(
-                input,
-                "Renamed can only be derived for structs",
-            ));
-        }
+    let Data::Struct(data) = &input.data else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Renamed can only be derived for structs",
+        ));
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Renamed can only be derived for structs with named fields",
+        ));
     };
 
     let columns = fields
+        .named
         .iter()
         .map(column_name)
         .collect::<syn::Result<Vec<String>>>()?;

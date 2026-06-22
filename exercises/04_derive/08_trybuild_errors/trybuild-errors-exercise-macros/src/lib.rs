@@ -19,25 +19,21 @@ pub fn getters(input: TokenStream) -> TokenStream {
 fn getters_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => {
-                return Err(syn::Error::new_spanned(
-                    input,
-                    "Getters can only be derived for structs with named fields",
-                ));
-            }
-        },
-        _ => {
-            return Err(syn::Error::new_spanned(
-                input,
-                "Getters can only be derived for structs",
-            ));
-        }
+    let Data::Struct(data) = &input.data else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Getters can only be derived for structs",
+        ));
     };
 
-    for field in fields {
+    let Fields::Named(fields) = &data.fields else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Getters can only be derived for structs with named fields",
+        ));
+    };
+
+    for field in fields.named.iter() {
         if is_unit_type(&field.ty) {
             let fname = field.ident.as_ref().unwrap();
             return Err(syn::Error::new_spanned(
@@ -47,7 +43,7 @@ fn getters_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
         }
     }
 
-    let getters = fields.iter().map(|f| {
+    let getters = fields.named.iter().map(|f| {
         let fname = f.ident.as_ref().unwrap();
         let ty = &f.ty;
         quote! {

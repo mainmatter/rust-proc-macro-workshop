@@ -17,20 +17,20 @@ pub fn getters(input: TokenStream) -> TokenStream {
 fn getters_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            // TODO: a panicking macro shows the user the unhelpful "proc-macro
-            //   derive panicked" message. Return a normal compiler error instead:
-            //   a token stream that invokes the `compile_error!` macro with an
-            //   explanatory message. (The book section shows the shape.)
-            _ => panic!("Getters can only be derived for structs with named fields"),
-        },
+    let Data::Struct(data) = &input.data else {
         // TODO: same here — produce a `compile_error!` instead of panicking.
-        _ => panic!("Getters can only be derived for structs"),
+        panic!("Getters can only be derived for structs");
     };
 
-    let getters = fields.iter().map(|f| {
+    let Fields::Named(fields) = &data.fields else {
+        // TODO: a panicking macro shows the user the unhelpful "proc-macro
+        //   derive panicked" message. Return a normal compiler error instead:
+        //   a token stream that invokes the `compile_error!` macro with an
+        //   explanatory message. (The book section shows the shape.)
+        panic!("Getters can only be derived for structs with named fields");
+    };
+
+    let getters = fields.named.iter().map(|f| {
         let fname = f.ident.as_ref().unwrap();
         let ty = &f.ty;
         quote! {

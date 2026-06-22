@@ -18,26 +18,22 @@ fn getters_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
 
     // Whole-item errors: the span covers the entire input, which is the right
     // choice here — the *type itself* is the wrong shape.
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => {
-                return Err(syn::Error::new_spanned(
-                    input,
-                    "Getters can only be derived for structs with named fields",
-                ));
-            }
-        },
-        _ => {
-            return Err(syn::Error::new_spanned(
-                input,
-                "Getters can only be derived for structs",
-            ));
-        }
+    let Data::Struct(data) = &input.data else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Getters can only be derived for structs",
+        ));
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        return Err(syn::Error::new_spanned(
+            input,
+            "Getters can only be derived for structs with named fields",
+        ));
     };
 
     // Per-field error: the span should cover just the offending field.
-    for field in fields {
+    for field in fields.named.iter() {
         if is_unit_type(&field.ty) {
             let fname = field.ident.as_ref().unwrap();
             // TODO: return an `Err` for this `()`-typed field. It must match the
@@ -53,7 +49,7 @@ fn getters_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
         }
     }
 
-    let getters = fields.iter().map(|f| {
+    let getters = fields.named.iter().map(|f| {
         let fname = f.ident.as_ref().unwrap();
         let ty = &f.ty;
         quote! {
