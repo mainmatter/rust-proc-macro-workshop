@@ -65,11 +65,11 @@ fn getters_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use syn::parse_str;
+    use syn::parse_quote;
 
     #[test]
     fn rejects_enums_with_an_error() {
-        let input: DeriveInput = parse_str("enum E { A, B }").unwrap();
+        let input: DeriveInput = parse_quote! { enum E { A, B } };
         let err = getters_impl(&input).unwrap_err();
         assert!(
             err.to_string()
@@ -80,7 +80,7 @@ mod tests {
 
     #[test]
     fn accepts_named_structs() {
-        let input: DeriveInput = parse_str("struct S { x: i32 }").unwrap();
+        let input: DeriveInput = parse_quote! { struct S { x: i32 } };
         assert!(getters_impl(&input).is_ok());
     }
 }

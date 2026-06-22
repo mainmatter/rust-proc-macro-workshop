@@ -79,10 +79,9 @@ fn column_name(field: &Field) -> syn::Result<String> {
 mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
-    use syn::parse_str;
+    use syn::parse_quote;
 
-    fn first_field(src: &str) -> Field {
-        let input: DeriveInput = parse_str(src).unwrap();
+    fn first_field(input: DeriveInput) -> Field {
         match input.data {
             Data::Struct(data) => data.fields.into_iter().next().unwrap(),
             _ => panic!("expected a struct"),
@@ -91,13 +90,13 @@ mod tests {
 
     #[test]
     fn defaults_to_field_name() {
-        let field = first_field("struct S { user_id: u64 }");
+        let field = first_field(parse_quote! { struct S { user_id: u64 } });
         assert_eq!(column_name(&field).unwrap(), "user_id");
     }
 
     #[test]
     fn uses_rename_attribute() {
-        let field = first_field(r#"struct S { #[rename = "id"] user_id: u64 }"#);
+        let field = first_field(parse_quote! { struct S { #[rename = "id"] user_id: u64 } });
         assert_eq!(column_name(&field).unwrap(), "id");
     }
 }
