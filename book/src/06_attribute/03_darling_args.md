@@ -61,10 +61,13 @@ Three things to note:
   it to the `proc_macro2::TokenStream` that `parse_meta_list` expects. It can fail on malformed input
   — and it fails with a `syn::Error`, so we wrap it with `darling::Error::from(..)` to get a uniform
   error type.
-- **`from_list`** is the `FromMeta` entry point, mirroring `from_derive_input` from chapter 4. It
-  reports unknown keys, missing required fields, and wrong value types for you.
-- **`write_errors()`** renders a `darling::Error` as `compile_error!` tokens. Returning that _is_
-  your error path — no `panic!`, a real diagnostic pointing at the bad argument.
+- **[`from_list`](https://docs.rs/darling/latest/darling/trait.FromMeta.html#method.from_list)** is
+  the `FromMeta` entry point, mirroring `from_derive_input` from chapter 4. It reports unknown keys,
+  missing required fields, and wrong value types for you.
+- **[`write_errors()`](https://docs.rs/darling/latest/darling/error/struct.Error.html#method.write_errors)**
+  renders a [`darling::Error`](https://docs.rs/darling/latest/darling/error/struct.Error.html) as
+  `compile_error!` tokens. Returning that _is_ your error path — no `panic!`, a real diagnostic
+  pointing at the bad argument.
 
 Required vs optional works exactly as it did with `FromDeriveInput`: a bare field is required, and
 `#[darling(default)]` (or `#[darling(default = "some_fn")]` for a custom default) makes it optional.
