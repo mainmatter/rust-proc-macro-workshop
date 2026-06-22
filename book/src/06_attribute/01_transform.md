@@ -7,7 +7,25 @@ results, and how the `#[retry]` macro you'll build at the end of the chapter wor
 
 ## A worked example: `#[timed]`
 
-Let's wrap a function so it prints how long it took to run:
+Let's wrap a function so it prints how long it took to run. From the caller's side, you just slap
+the attribute on a function and use it as normal:
+
+```rust
+#[timed]
+fn slow_add(a: u64, b: u64) -> u64 {
+    std::thread::sleep(std::time::Duration::from_millis(10));
+    a + b
+}
+
+fn main() {
+    let sum = slow_add(1, 2);
+    // prints something like: `slow_add took 10.1ms` to stderr
+    assert_eq!(sum, 3);
+}
+```
+
+The function keeps its signature, arguments, and return value — `#[timed]` only adds the timing
+message around the original body. Here's the macro that makes it work:
 
 ```rust
 use quote::quote;
