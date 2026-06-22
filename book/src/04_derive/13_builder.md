@@ -90,10 +90,18 @@ a fundamental limitation of macros, which only ever see syntax, never resolved t
 
 ## Exercise
 
-Complete `#[derive(Builder)]`. The builder struct, its initialiser, and the setters are generated
-for you, along with the `option_inner` helper. Your job is the heart of `build()`: for each field,
-emit the expression that produces its value — cloning optional fields straight through, and
-erroring on unset required ones. Make `examples/command.rs` pass.
+Complete `#[derive(Builder)]`. The per-field loop already builds most of the fragments for you —
+the builder field, its initialiser, and the setter — and the `option_inner` helper is provided. But
+none of it is wired up yet: `builder_impl` currently returns nothing. You have two jobs:
+
+1. **Each field's `build()` expression** — emit the value each field contributes inside `build()`:
+   clone optional fields straight through, and error on unset required ones.
+2. **The final assembly** — build and return the macro's output, splicing in every per-field
+   fragment (the builder fields, initialisers, setters, and the `build()` expressions from job 1):
+   the `...Builder` struct, the `builder()` constructor, and the `impl` block carrying the setters
+   and the fallible `build()`.
+
+Make `examples/command.rs` pass.
 
 > **Going further.** A common extension is a field attribute, `#[builder(each = "arg")]`, that
 > generates a method to push items onto a `Vec` field one at a time. With this chapter behind you,
