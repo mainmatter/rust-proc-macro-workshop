@@ -95,13 +95,15 @@ fn generate(sm: &StateMachine) -> proc_macro2::TokenStream {
     //     - `Display` and `Error` impls for it. Use absolute paths
     //       (`::core::fmt::Display`, `::std::error::Error`, ...) so the output
     //       compiles in any context (chapter 4, absolute paths).
-    //     - An `impl <Name>` block with four methods: `initial()` returns the
-    //       `#[initial]` state; `name(&self)` maps each variant to its name as a
-    //       `&'static str` (one match arm per `sm.variants` entry);
-    //       `can_transition_to(&self, target: &Self)` matches the *pair*
-    //       `(self, target)` with one `true` arm per `sm.transitions` edge and a
-    //       `_ => false` catch-all; and `transition_to(self, target: Self)` returning
-    //       `Result<Self, _>`, delegating to `can_transition_to`.
+    //     - An `impl <Name>` block with four methods:
+    //         - `initial()` returns the `#[initial]` state.
+    //         - `name(&self)` maps each variant to its name as a `&'static str`
+    //           (one match arm per `sm.variants` entry).
+    //         - `can_transition_to(&self, target: &Self)` matches the *pair*
+    //           `(self, target)` with one `true` arm per `sm.transitions` edge and
+    //           a `_ => false` catch-all.
+    //         - `transition_to(self, target: Self)` returning `Result<Self, _>`,
+    //           delegating to `can_transition_to`.
     //
     //   Build the repeated match arms by iterating `sm.variants` / `sm.transitions`
     //   into `quote! { .. }` fragments, then splice them with `#(#arms)*` (chapter 3).
