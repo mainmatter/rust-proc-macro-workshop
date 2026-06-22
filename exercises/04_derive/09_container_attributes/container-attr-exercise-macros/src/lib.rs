@@ -65,17 +65,17 @@ fn extract_times(input: &DeriveInput) -> syn::Result<usize> {
 mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
-    use syn::parse_str;
+    use syn::parse_quote;
 
     #[test]
     fn default_times() {
-        let input: DeriveInput = parse_str("struct S;").unwrap();
+        let input: DeriveInput = parse_quote! { struct S; };
         assert_eq!(extract_times(&input).unwrap(), 1);
     }
 
     #[test]
     fn custom_times() {
-        let input: DeriveInput = parse_str("#[repeat(times = 4)] struct S;").unwrap();
+        let input: DeriveInput = parse_quote! { #[repeat(times = 4)] struct S; };
         assert_eq!(extract_times(&input).unwrap(), 4);
     }
 }

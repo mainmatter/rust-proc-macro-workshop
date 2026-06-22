@@ -50,13 +50,13 @@ fn getters_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use syn::parse_str;
+    use syn::parse_quote;
 
     #[test]
     fn rejects_enums_with_a_compile_error() {
         // A misused macro must *return* a `compile_error!` invocation, not panic.
         // If `getters_impl` panicked, this test would fail with that panic.
-        let input: DeriveInput = parse_str("enum E { A, B }").unwrap();
+        let input: DeriveInput = parse_quote! { enum E { A, B } };
         let output = getters_impl(&input).to_string();
         assert!(
             output.contains("compile_error"),
@@ -66,7 +66,7 @@ mod tests {
 
     #[test]
     fn rejects_tuple_structs_with_a_compile_error() {
-        let input: DeriveInput = parse_str("struct T(i32, i32);").unwrap();
+        let input: DeriveInput = parse_quote! { struct T(i32, i32); };
         let output = getters_impl(&input).to_string();
         assert!(
             output.contains("compile_error"),

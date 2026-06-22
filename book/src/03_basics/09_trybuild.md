@@ -3,12 +3,12 @@
 In the [`proc-macro2`](./05_proc_macro2.md) section you wrote a unit test that called your
 code-generation function directly and asserted on the tokens it produced — no separate crate,
 no real `#[derive]`. That's the fastest way to check your _logic_, and you can do the same for
-the `FieldNames` macro:
+the `FieldNames` macro (using `parse_quote!` now that you know it):
 
 ```rust
 #[test]
 fn generates_field_names() {
-    let input: syn::DeriveInput = syn::parse_str("struct Foo { x: i32 }").unwrap();
+    let input: syn::DeriveInput = syn::parse_quote! { struct Foo { x: i32 } };
     let output = field_names_impl(&input).to_string();
     assert!(output.contains("field_names"));
 }
@@ -44,7 +44,7 @@ confirm _that_ it panics:
 #[test]
 #[should_panic]
 fn rejects_enums() {
-    let input: syn::DeriveInput = syn::parse_str("enum E { A, B }").unwrap();
+    let input: syn::DeriveInput = syn::parse_quote! { enum E { A, B } };
     field_names_impl(&input);
 }
 ```

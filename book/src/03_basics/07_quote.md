@@ -151,6 +151,23 @@ we report errors with `syn::Error` instead (chapter 4) — but it's a useful too
 when you want a compile error in your _generated_ code to point at a specific span in the
 user's source.
 
+## `parse_quote!` — the input counterpart
+
+When writing unit tests for your macros, you need to construct `syn` types as inputs.
+[`syn::parse_quote!`](https://docs.rs/syn/latest/syn/macro.parse_quote.html) is the idiomatic
+way to do that — the mirror image of `quote!`: where `quote!` turns Rust syntax into a
+`TokenStream` for output, `parse_quote!` turns it into a typed syn value for input. Despite
+the name, it lives in `syn`, not `quote`.
+
+```rust
+use syn::{DeriveInput, parse_quote};
+
+let input: DeriveInput = parse_quote! { struct Foo { x: i32 } };
+```
+
+This replaces `syn::parse_str("...").unwrap()`: you write real tokens instead of a string,
+so typos are caught at compile time rather than at runtime.
+
 ## Exercise
 
 The exercise provides a working derive macro that generates a `field_names()` method using

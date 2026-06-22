@@ -78,11 +78,11 @@ fn is_unit_type(ty: &Type) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use syn::parse_str;
+    use syn::parse_quote;
 
     #[test]
     fn rejects_unit_typed_field() {
-        let input: DeriveInput = parse_str("struct S { ok: i32, marker: () }").unwrap();
+        let input: DeriveInput = parse_quote! { struct S { ok: i32, marker: () } };
         let err = getters_impl(&input).unwrap_err();
         let msg = err.to_string();
         // The message should name the specific field that's at fault...
@@ -96,7 +96,7 @@ mod tests {
 
     #[test]
     fn accepts_normal_fields() {
-        let input: DeriveInput = parse_str("struct S { x: i32, y: i32 }").unwrap();
+        let input: DeriveInput = parse_quote! { struct S { x: i32, y: i32 } };
         assert!(getters_impl(&input).is_ok());
     }
 }

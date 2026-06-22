@@ -49,11 +49,17 @@ fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use syn::parse_str;
+    use syn::parse_quote;
 
     /// Unit-test the code generation directly, the same way you did in the
-    /// `proc-macro2` exercise — parse a `DeriveInput` from a string and call
+    /// `proc-macro2` exercise — construct a `DeriveInput` and call
     /// `field_names_impl`, no separate crate and no real `#[derive]` needed.
+    ///
+    /// Now that `parse_quote!` has been introduced (see the book section), we
+    /// use it instead of `syn::parse_str`. Both produce a `DeriveInput`, but
+    /// `parse_quote!` writes real Rust tokens directly in source (tokenised at
+    /// compile time) rather than parsing a string at runtime, so typos become
+    /// compile errors.
     ///
     /// This keeps passing whether `field_names_impl` uses `format!` or `quote!`,
     /// since both produce the same tokens.
@@ -69,7 +75,7 @@ mod tests {
     /// only go so far.
     #[test]
     fn generates_field_names() {
-        let input: DeriveInput = parse_str("struct Color { r: u8, g: u8, b: u8 }").unwrap();
+        let input: DeriveInput = parse_quote! { struct Color { r: u8, g: u8, b: u8 } };
         let output = field_names_impl(&input).to_string();
         assert!(
             output.contains("impl Color"),
@@ -83,7 +89,7 @@ mod tests {
 
     #[test]
     fn empty_struct_still_has_the_method() {
-        let input: DeriveInput = parse_str("struct Empty {}").unwrap();
+        let input: DeriveInput = parse_quote! { struct Empty {} };
         let output = field_names_impl(&input).to_string();
         assert!(
             output.contains("field_names"),
