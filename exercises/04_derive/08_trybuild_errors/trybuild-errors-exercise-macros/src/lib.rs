@@ -58,6 +58,7 @@ fn getters_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     });
 
     Ok(quote! {
+        #[automatically_derived]
         impl #name {
             #(#getters)*
         }

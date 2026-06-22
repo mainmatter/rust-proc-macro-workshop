@@ -29,6 +29,7 @@ fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let field_names = fields.iter().map(|f| f.ident.as_ref().unwrap().to_string());
 
     quote! {
+        #[automatically_derived]
         impl #name {
             pub fn field_names() -> &'static [&'static str] {
                 &[#(#field_names),*]

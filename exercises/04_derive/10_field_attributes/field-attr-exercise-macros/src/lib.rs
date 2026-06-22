@@ -43,6 +43,7 @@ fn renamed_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
         .collect::<syn::Result<Vec<String>>>()?;
 
     Ok(quote! {
+        #[automatically_derived]
         impl #name {
             pub fn column_names() -> Vec<&'static str> {
                 vec![ #(#columns),* ]

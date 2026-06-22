@@ -197,14 +197,17 @@ fn generate(sm: &StateMachine) -> proc_macro2::TokenStream {
             pub to: &'static str,
         }
 
+        #[automatically_derived]
         impl ::core::fmt::Display for #error_name {
             fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                 ::core::write!(f, "invalid transition from {} to {}", self.from, self.to)
             }
         }
 
+        #[automatically_derived]
         impl ::std::error::Error for #error_name {}
 
+        #[automatically_derived]
         impl #name {
             pub fn initial() -> Self {
                 #name::#initial

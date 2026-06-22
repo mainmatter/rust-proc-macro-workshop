@@ -43,6 +43,7 @@ fn ordinal_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
             });
 
     quote! {
+        #[automatically_derived]
         impl #name {
             pub fn ordinal(&self) -> usize {
                 match self {

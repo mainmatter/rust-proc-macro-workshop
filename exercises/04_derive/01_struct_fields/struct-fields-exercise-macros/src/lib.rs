@@ -57,6 +57,7 @@ fn debug_fields_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     };
 
     quote! {
+        #[automatically_derived]
         impl #name {
             pub fn debug_fields(&self) -> Vec<String> {
                 vec![ #(#entries),* ]

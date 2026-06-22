@@ -28,6 +28,7 @@ fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
         .collect();
 
     quote! {
+        #[automatically_derived]
         impl #name {
             pub fn field_names() -> &'static [&'static str] {
                 &[#(#field_strings),*]

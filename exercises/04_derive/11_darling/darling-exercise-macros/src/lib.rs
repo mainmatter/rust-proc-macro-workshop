@@ -66,6 +66,7 @@ fn model_impl(input: &DeriveInput) -> darling::Result<proc_macro2::TokenStream> 
     });
 
     Ok(quote! {
+        #[automatically_derived]
         impl #ident {
             pub fn table_name() -> &'static str {
                 #table
