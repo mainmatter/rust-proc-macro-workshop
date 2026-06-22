@@ -15,15 +15,15 @@ pub fn field_count(input: TokenStream) -> TokenStream {
 fn field_count_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let _name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => panic!("FieldCount only supports named structs"),
-        },
-        _ => panic!("FieldCount only supports structs"),
+    let Data::Struct(data) = &input.data else {
+        panic!("FieldCount only supports structs");
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        panic!("FieldCount only supports named structs");
     };
 
     // TODO: Count the number of fields and generate the `impl` block.
-    let _ = fields;
+    let _ = fields.named;
     todo!()
 }

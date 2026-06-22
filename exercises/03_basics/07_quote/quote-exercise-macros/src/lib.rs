@@ -18,18 +18,19 @@ pub fn field_names(input: TokenStream) -> TokenStream {
 fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => panic!("FieldNames only supports named structs"),
-        },
-        _ => panic!("FieldNames only supports structs"),
+    let Data::Struct(data) = &input.data else {
+        panic!("FieldNames only supports structs");
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        panic!("FieldNames only supports named structs");
     };
 
     // TODO: Rewrite this function to use `quote!` instead of `format!`.
     //       Also add `#[automatically_derived]` to the generated `impl` block —
     //       the book section explains why every derive-emitted impl should carry it.
     let field_names_str = fields
+        .named
         .iter()
         .map(|f| format!("\"{}\"", f.ident.as_ref().unwrap()))
         .collect::<Vec<_>>()

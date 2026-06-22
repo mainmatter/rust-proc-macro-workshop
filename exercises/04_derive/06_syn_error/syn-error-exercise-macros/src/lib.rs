@@ -29,23 +29,19 @@ pub fn getters(input: TokenStream) -> TokenStream {
 fn getters_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => {
-                return quote! {
-                    compile_error!("Getters can only be derived for structs with named fields");
-                };
-            }
-        },
-        _ => {
-            return quote! {
-                compile_error!("Getters can only be derived for structs");
-            };
-        }
+    let Data::Struct(data) = &input.data else {
+        return quote! {
+            compile_error!("Getters can only be derived for structs");
+        };
     };
 
-    let getters = fields.iter().map(|f| {
+    let Fields::Named(fields) = &data.fields else {
+        return quote! {
+            compile_error!("Getters can only be derived for structs with named fields");
+        };
+    };
+
+    let getters = fields.named.iter().map(|f| {
         let fname = f.ident.as_ref().unwrap();
         let ty = &f.ty;
         quote! {

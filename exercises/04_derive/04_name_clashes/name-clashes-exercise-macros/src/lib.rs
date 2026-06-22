@@ -20,18 +20,18 @@ pub fn accessors(input: TokenStream) -> TokenStream {
 fn accessors_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => panic!("Accessors only supports named structs"),
-        },
-        _ => panic!("Accessors only supports structs"),
+    let Data::Struct(data) = &input.data else {
+        panic!("Accessors only supports structs");
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        panic!("Accessors only supports named structs");
     };
 
     let mut accessor_fns = Vec::new();
     let mut methods = Vec::new();
 
-    for field in fields {
+    for field in &fields.named {
         let fname = field.ident.as_ref().unwrap();
         let ty = &field.ty;
         let accessor = accessor_name(name, fname);

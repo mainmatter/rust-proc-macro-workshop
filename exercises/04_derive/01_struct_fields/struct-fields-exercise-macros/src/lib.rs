@@ -20,14 +20,13 @@ pub fn debug_fields(input: TokenStream) -> TokenStream {
 fn debug_fields_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
 
-    let fields = match &input.data {
-        Data::Struct(data) => &data.fields,
-        _ => panic!("DebugFields only supports structs"),
+    let Data::Struct(data) = &input.data else {
+        panic!("DebugFields only supports structs");
     };
 
     // Build one `format!("{:?}", <field access>)` expression per field. The
     // field-access expression differs between named and tuple structs.
-    let entries: Vec<proc_macro2::TokenStream> = match fields {
+    let entries: Vec<proc_macro2::TokenStream> = match &data.fields {
         // struct Foo { x: i32, y: i32 } -> access via field name: `self.x`
         Fields::Named(fields) => fields
             .named

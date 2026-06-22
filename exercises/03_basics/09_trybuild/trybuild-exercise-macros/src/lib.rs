@@ -14,15 +14,16 @@ pub fn field_names(input: TokenStream) -> TokenStream {
 
 fn field_names_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
-    let fields = match &input.data {
-        Data::Struct(data) => match &data.fields {
-            Fields::Named(fields) => &fields.named,
-            _ => panic!("FieldNames only supports named structs"),
-        },
-        _ => panic!("FieldNames only supports structs"),
+    let Data::Struct(data) = &input.data else {
+        panic!("FieldNames only supports structs");
+    };
+
+    let Fields::Named(fields) = &data.fields else {
+        panic!("FieldNames only supports named structs");
     };
 
     let field_strings: Vec<String> = fields
+        .named
         .iter()
         .map(|f| f.ident.as_ref().unwrap().to_string())
         .collect();

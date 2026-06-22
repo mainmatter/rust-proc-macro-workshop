@@ -21,9 +21,8 @@ pub fn ordinal(input: TokenStream) -> TokenStream {
 fn ordinal_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     let name = &input.ident;
 
-    let data = match &input.data {
-        Data::Enum(data) => data,
-        _ => panic!("Ordinal only supports enums"),
+    let Data::Enum(data) = &input.data else {
+        panic!("Ordinal only supports enums");
     };
 
     // One match arm per variant: `<pattern> => <index>,`.
