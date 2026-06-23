@@ -52,6 +52,7 @@ fn empty_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     });
 
     Ok(quote! {
+        #[automatically_derived]
         impl #impl_generics #name #ty_generics #where_clause {
             pub fn empty() -> Self {
                 Self { #(#inits),* }

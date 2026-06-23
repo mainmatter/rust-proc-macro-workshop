@@ -53,6 +53,7 @@ fn accessors_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     quote! {
         #(#accessor_fns)*
 
+        #[automatically_derived]
         impl #name {
             #(#methods)*
         }
