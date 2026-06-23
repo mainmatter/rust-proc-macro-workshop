@@ -24,6 +24,7 @@ fn type_name_impl(input: &DeriveInput) -> proc_macro2::TokenStream {
     //   Fix it by referring to the standard library type by its absolute path.
     //   Make both the return type and the constructor call use the absolute path.
     quote! {
+        #[automatically_derived]
         impl #name {
             pub fn type_name(&self) -> String {
                 String::from(stringify!(#name))

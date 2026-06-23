@@ -24,6 +24,7 @@ fn repeat_impl(input: &DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     let times = extract_times(input)?;
 
     Ok(quote! {
+        #[automatically_derived]
         impl #name {
             pub fn repeated() -> String {
                 stringify!(#name).repeat(#times)
