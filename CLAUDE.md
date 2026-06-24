@@ -129,6 +129,6 @@ reflected in the solution. After modifying an exercise, you MUST:
 2. **Resolve any conflicts**, keeping the solution's filled-in implementation (the real code that
    replaces the exercise's `todo!()`) while picking up the new exercise scaffolding (tests,
    derives, `.wr.toml`/`check.sh`, comments, etc.).
-3. **Ensure `wr check` passes for the updated solution.** Check out the `solutions` commit
-   (`jj edit solutions`) and run `wr check` from the affected exercise's directory. The solution
-   must be green before you consider the exercise change complete.
+3. **Validate the solutions.** Check out the `solutions` commit (`jj edit solutions`) and run
+   `wr --recheck` to recheck all exercises (use `wr --keep-going` first on a fresh clone to build
+   the initial cache). All exercises must be green before you consider the change complete.
