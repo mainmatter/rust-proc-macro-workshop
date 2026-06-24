@@ -50,7 +50,7 @@ mod tests {
             "expected generated code to contain 'type_name', got: {output_str}"
         );
         assert!(
-            output_str.contains("Gamma"),
+            output_str.contains("\"Gamma\""),
             "expected generated code to return \"Gamma\" as the type name, got: {output_str}"
         );
     }
