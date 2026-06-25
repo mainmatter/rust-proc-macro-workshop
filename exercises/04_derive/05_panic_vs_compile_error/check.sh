@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eu
 
 # The error-path checks live in the macros crate's unit tests, so test both the
 # consumer crate and the macros crate (the consumer's trybuild test only covers

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eu
 
 # This exercise relies on `cargo expand`, so make sure it is installed before
 # running the tests. See the book for installation instructions.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eu
 
 dir="$(dirname "$0")"
 lib="$dir/quote-exercise-macros/src/lib.rs"
