@@ -107,3 +107,8 @@ Authored by [Guillaume Desmottes](mailto:guillaume.desmottes@mainmatter.com) for
 Guillaume is part of the Mainmatter Rust team. He maintains various crates, such as
 [`system-deps`](https://crates.io/crates/system-deps), and is the creator of
 [Karapulse](https://gitlab.freedesktop.org/gdesmott/karapulse), a Rust karaoke application.
+
+## License
+
+Copyright © 2024- Mainmatter GmbH (https://mainmatter.com), released under the
+[PolyForm-Noncommercial-1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0).
